@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="th">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>บทความทั้งหมด | Natthaphon</title>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.7;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 64px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 32px;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #1a1a1a;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .page-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Article Count */
+        .article-count {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        /* Article List */
+        .article-list {
+            list-style: none;
+        }
+
+        .article-item {
+            margin-bottom: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-item:last-child {
+            border-bottom: none;
+        }
+
+        .article-date {
+            font-size: 13px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .article-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .article-title a {
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .article-title a:hover {
+            color: #555;
+        }
+
+        .article-excerpt {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .read-more {
+            font-size: 14px;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            padding: 4px 0;
+            border-bottom: 1px solid #1a1a1a;
+            transition: opacity 0.2s ease;
+        }
+
+        .read-more:hover {
+            opacity: 0.6;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #999;
+        }
+
+        .empty-state-title {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #666;
+        }
+
+        .empty-state-text {
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            header {
+                margin-bottom: 48px;
+            }
+
+            .page-title {
+                font-size: 26px;
+            }
+
+            .page-description {
+                font-size: 15px;
+            }
+
+            .article-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container">
+   <header><a href="index.html" class="back-link">← กลับหน้าแรก</a>
+    <h1 class="page-title" id="page-title">บทความทั้งหมด</h1>
+    <p class="page-description" id="page-description">รวมบทความและบันทึกทั้งหมด เรียงตามวันที่ล่าสุด</p>
+   </header>
+   <div class="article-count">
+    ทั้งหมด 1 บทความ
+   </div><!-- Article List -->
+   <ul class="article-list">
+    <li class="article-item"><span class="article-date">15 มกราคม 2025</span> <h2 class="article-title"><a href="articles/2025-01-first-post.html">บทความแรก: เริ่มต้นเขียน Blog</a></h2><p class="article-excerpt">นี่คือบทความแรกของบล็อก In Progress — พื้นที่สำหรับบันทึกความคิด การทำงาน และการเรียนรู้ ไม่มีอะไรซับซ้อน แค่เริ่มเขียน เริ่มทำ เริ่มเรียนรู้ไปด้วยกัน</p><a href="articles/2025-01-first-post.html" class="read-more">อ่านต่อ →</a></li><!-- เพิ่มบทความใหม่ที่นี่ — คัดลอกโครงสร้างด้านบนแล้ววางซ้ำ --> <!-- ถ้ายังไม่มีบทความเลย แสดง Empty State --> <!-- <li class="empty-state">
+                <h3 class="empty-state-title">ยังไม่มีบทความ</h3>
+                <p class="empty-state-text">กำลังเตรียมเนื้อหา<br>เร็วๆ นี้...</p>
+            </li> -->
+   </ul>
+   <footer>
+    <p>© 2025 Natthaphon | In Progress</p>
+   </footer>
+  </div>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script>
+        const defaultConfig = {
+            page_title: "บทความทั้งหมด",
+            page_description: "รวมบทความและบันทึกทั้งหมด เรียงตามวันที่ล่าสุด"
+        };
+
+        const element = {
+            defaultConfig,
+            
+            onConfigChange: async (config) => {
+                const titleElement = document.getElementById('page-title');
+                const descriptionElement = document.getElementById('page-description');
+                
+                if (titleElement) {
+                    titleElement.textContent = config.page_title || defaultConfig.page_title;
+                }
+                
+                if (descriptionElement) {
+                    descriptionElement.textContent = config.page_description || defaultConfig.page_description;
+                }
+            },
+            
+            mapToCapabilities: (config) => ({
+                recolorables: [],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            }),
+            
+            mapToEditPanelValues: (config) => new Map([
+                ["page_title", config.page_title || defaultConfig.page_title],
+                ["page_description", config.page_description || defaultConfig.page_description]
+            ])
+        };
+
+        if (window.elementSdk) {
+            window.elementSdk.init(element);
+        }
+    </script>
+  <li class="article-item"><span class="article-date">วันที่ใหม่</span> <h2 class="article-title"><a href="articles/ชื่อไฟล์ใหม่.html">หัวข้อบทความใหม่</a></h2><p class="article-excerpt">เกริ่นนำบทความใหม่</p><a href="articles/ชื่อไฟล์ใหม่.html" class="read-more">อ่านต่อ →</a></li>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ba36653e4fe270d',t:'MTc2Nzc4ODMyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
