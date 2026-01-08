@@ -33,8 +33,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
-    <script src="/_sdk/element_sdk.js" defer>
-    </script>
+    <script src="/_sdk/element_sdk.js" defer></script>
+    <style>@view-transition { navigation: auto; }</style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
     <script type="application/ld+json">
       {"@context": 
       "https://schema.org",
@@ -80,8 +82,159 @@
       <a href="../en/index.html">EN</a> |
       <a href="../ko/index.html">KO</a>
     </div>
-
-   
+      <div class="page-wrapper"><!-- Header -->
+   <header class="site-header">
+    <div class="header-inner">
+     <div class="church-logo">
+      <svg class="logo-icon" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L12 10M12 10L16 6M12 10L8 6" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <path d="M7 10L7 22M17 10L17 22" stroke="#667eea" stroke-width="2" stroke-linecap="round" /> <path d="M4 22L20 22" stroke="#667eea" stroke-width="2" stroke-linecap="round" /> <rect x="10" y="14" width="4" height="8" stroke="#667eea" stroke-width="2" />
+      </svg><span class="church-name-header" id="headerChurchName">คริสตจักรชีวิตใหม่</span>
+     </div>
+     <div class="nav-actions">
+      <div class="lang-switch" id="langSwitch"><button class="lang-current" id="langCurrent" aria-label="เปลี่ยนภาษา"> <span id="currentLang">TH</span> <span class="lang-arrow">▼</span> </button>
+       <div class="lang-dropdown"><button class="lang-option active-lang" data-lang="th">ไทย (TH)</button> <button class="lang-option" data-lang="en">English (EN)</button> <button class="lang-option" data-lang="ko">한국어 (KO)</button>
+       </div>
+      </div><button class="menu-btn" id="menuBtn" aria-label="เปิดเมนู">
+       <svg class="menu-icon" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12H21M3 6H21M3 18H21" stroke="#2c3e50" stroke-width="2" stroke-linecap="round" />
+       </svg></button>
+     </div>
+    </div>
+   </header><!-- Mobile Menu -->
+   <div class="mobile-menu" id="mobileMenu">
+    <div class="menu-header">
+     <div class="church-logo">
+      <svg class="logo-icon" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L12 10M12 10L16 6M12 10L8 6" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <path d="M7 10L7 22M17 10L17 22" stroke="#667eea" stroke-width="2" stroke-linecap="round" /> <path d="M4 22L20 22" stroke="#667eea" stroke-width="2" stroke-linecap="round" /> <rect x="10" y="14" width="4" height="8" stroke="#667eea" stroke-width="2" />
+      </svg>
+     </div><button class="close-btn" id="closeBtn" aria-label="ปิดเมนู">×</button>
+    </div>
+    <div class="menu-items">
+     <div class="menu-item">
+      ��น้าแรก
+     </div>
+     <div class="menu-item">
+      เกี่ยวกับเรา
+     </div>
+     <div class="menu-item">
+      คำเทศนา
+     </div>
+     <div class="menu-item">
+      ��ลุ่มสร้างสาวก
+     </div>
+     <div class="menu-item">
+      กิจกรรม
+     </div>
+     <div class="menu-item">
+      ติดต่อเรา
+     </div>
+    </div>
+   </div><!-- Hero Section -->
+   <section class="hero-wrapper">
+    <div class="hero-content">
+     <h1 class="hero-title" id="heroTitle">ยินดีต้อนรับสู่คริสตจักรสาวกพระเยซูกรุงเทพ</h1>
+     <p class="hero-subtitle" id="heroSubtitle">JDM Bangkok Thailand – นมัสการพระเจ้า สร้างสาวก และแบ่งปันความรักของพระเยซูคริสต์</p>
+     <div class="cta-buttons"><button class="btn-primary">เข้าร่วมนมัสการ</button> <button class="btn-secondary">ติดต่อ���ริสตจักร</button>
+     </div>
+    </div>
+   </section><!-- Welcome Section -->
+   <section class="section-wrapper">
+    <h2 class="section-title">เราเป็นใคร</h2>
+    <p class="welcome-text" id="welcomeText">เราเป็นคริสตจักรที่เปิดรับทุกคน ไม่ว่าคุณจะมาจากไหน เคยผ่านอะไรมา ที่นี่คือบ้านสำหรับทุกคน เราเชื่อในพระคุณของพระเจ้า และอยากเดินทางในความเชื่อไปพร้อมกับคุณ มาร่วมเป็นส่วนหนึ่งของครอบครัวที่รักกัน เติบโตไปด้วยกัน และสร้างความแตกต่างในโลกใบนี���</p>
+   </section><!-- Worship Time -->
+   <section class="section-wrapper">
+    <div class="worship-card">
+     <h2 class="worship-title">เวลานมัสการ</h2>
+     <p class="worship-time" id="worshipTime">ทุกวันอาทิตย์ เวลา 10:00 น.</p>
+     <div class="worship-types">
+      <div class="worship-type">
+       🏠 เหมาะ��ำหรับครอบครัว
+      </div>
+      <div class="worship-type">
+       📚 เหมาะสำหรับนัก��ึก��า
+      </div>
+      <div class="worship-type">
+       💼 เหมาะสำหรับคนทำงาน
+      </div>
+     </div>
+    </div>
+   </section><!-- Groups Section -->
+   <section class="section-wrapper">
+    <h2 class="section-title">กลุ่มสร้างสาวก</h2>
+    <div class="groups-grid">
+     <div class="group-card">
+      <div class="group-icon">
+       📚
+      </div>
+      <h3 class="group-title">กลุ่มนักศึกษา</h3>
+      <p class="group-desc">เรียนรู้พระคำในยุคของคุณ แบ่งปันชีวิต และเติบโตไปด้วยกันในความเชื่อ</p>
+     </div>
+     <div class="group-card">
+      <div class="group-icon">
+       💼
+      </div>
+      <h3 class="group-title">������ุ่มคนทำงาน</h3>
+      <p class="group-desc">พบปะคนทำงานที่มีความเชื่อเดียวกัน สนับสนุนกันในชีวิตและการงาน</p>
+     </div>
+     <div class="group-card">
+      <div class="group-icon">
+       👨‍👩‍👧‍👦
+      </div>
+      <h3 class="group-title">กลุ่มครอบครัว</h3>
+      <p class="group-desc">เรียนรู้การสร้างครอบครัวที่แข็งแรงตามหลักพระคำ เลี้ยงดูลูกในทางพระเจ้า</p>
+     </div>
+    </div>
+   </section><!-- Sermon Section -->
+   <section class="section-wrapper">
+    <h2 class="section-title">คำเทศนาล่าสุด</h2>
+    <div class="sermon-grid">
+     <div class="sermon-card">
+      <div class="sermon-thumbnail">
+       🎤
+      </div>
+      <div class="sermon-content">
+       <h3 class="sermon-title">ความหวังที่ไม่มีวันสูญหาย</h3>
+       <p class="sermon-date">วันอาทิตย์ที่ 15 ธันวาคม 2024</p>
+      </div>
+     </div>
+     <div class="sermon-card">
+      <div class="sermon-thumbnail">
+       📖
+      </div>
+      <div class="sermon-content">
+       <h3 class="sermon-title">ความรักที่เปลี่ยนแปลงชีวิต</h3>
+       <p class="sermon-date">วันอาทิตย์ที��� 8 ธันวาคม 2024</p>
+      </div>
+     </div>
+     <div class="sermon-card">
+      <div class="sermon-thumbnail">
+       ✝️
+      </div>
+      <div class="sermon-content">
+       <h3 class="sermon-title">เดินกับพระเจ้าในชีวิตประจำวัน</h3>
+       <p class="sermon-date">วันอาทิตย์ที่ 1 ธันวาคม 2024</p>
+      </div>
+     </div>
+    </div><button class="view-all-btn">ดูคำเทศนาทั้งหมด</button>
+   </section><!-- Contact Section -->
+   <section class="contact-wrapper">
+    <div class="contact-inner">
+     <h2 class="contact-title">มีคำถา��หร��อต้องการคำอธิษฐาน?</h2>
+     <p class="contact-text">เรายินดีที่จะรับฟังและอธิษฐานเผื่อคุณ ติดต่อเราได้ทุกเมื่อ</p>
+     <div class="contact-buttons"><button class="btn-white">ติดต่อคริสตจักร</button> <button class="btn-white">ขอคำอธิษฐาน</button>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="site-footer">
+    <div class="footer-logo">
+     <svg class="footer-logo-icon" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L12 10M12 10L16 6M12 10L8 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <path d="M7 10L7 22M17 10L17 22" stroke="white" stroke-width="2" stroke-linecap="round" /> <path d="M4 22L20 22" stroke="white" stroke-width="2" stroke-linecap="round" /> <rect x="10" y="14" width="4" height="8" stroke="white" stroke-width="2" />
+     </svg>
+    </div>
+    <p class="footer-verse" id="footerVerse">"เพราะว่าพระเจ้าทรงรักโลก จนได้ทรงประทานพระบุตรองค์เดียวของพระองค์ เพื่อทุกคนที่วางใจในพระบุตรนั้นจะไม่พินาศ แต่มีชีวิตนิรันดร์" ยอห์น 3:16</p>
+    <div class="social-links"><a href="#" class="social-link" target="_blank" rel="noopener noreferrer">Facebook</a> <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">YouTube</a> <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">LINE</a>
+    </div>
+    <p class="copyright">© 2024 คริสตจักรสาวกพระเยซูกรุงเทพ | JDM Bangkok Thailand สงวนลิขสิทธิ์</p>
+   </footer>
+  </div>
+    <script src="js/main.js"></script>
 </body>
+  
 </html>
 
