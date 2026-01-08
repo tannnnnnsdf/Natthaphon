@@ -10,6 +10,10 @@
             color: #2c3e50;
             overflow-x: hidden;
         }
+.logo-img {
+  height: 40px;
+  width: auto;
+}
 
         html, body {
             height: 100%;
