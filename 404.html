@@ -1,9 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>404</title>
+
+<title>ไม่พบหน้านี้ | คริสตจักรสาวกพระเยซูกรุงเทพ</title>
+
+<!-- ===== SEO ===== -->
+<meta name="robots" content="noindex, follow" />
+<meta name="description" content="ไม่พบหน้าที่คุณกำลังค้นหา กรุณากลับสู่หน้าหลักของคริสตจักรสาวกพระเยซูกรุงเทพ (JDM Bangkok Thailand)" />
+
+<meta property="og:title" content="ไม่พบหน้านี้ | คริสตจักรสาวกพระเยซูกรุงเทพ" />
+<meta property="og:description" content="เรายินดีต้อนรับคุณกลับสู่หน้าหลักของคริสตจักรสาวกพระเยซูกรุงเทพ" />
+<meta property="og:type" content="website" />
 
 <style>
 /* ===== BASE ===== */
@@ -15,134 +24,193 @@ body{
   align-items:center;
   background:#ffffff;
   color:#111;
-  font-family:system-ui,sans-serif;
+  font-family:system-ui,-apple-system,sans-serif;
   text-align:center;
-  cursor:pointer;
 }
 
-.wrapper{
+main{
+  max-width:520px;
+  padding:1.5rem;
+}
+
+/* ===== LOGO ===== */
+.logo{
+  width:120px;
+  margin:0 auto 1rem;
+}
+.logo img{
   width:100%;
-  max-width:420px;
-  padding:1rem;
-  box-sizing:border-box;
+  height:auto;
 }
 
-/* ===== VIDEO (Portrait) ===== */
-video{
+/* ===== ILLUSTRATION ===== */
+.illustration{
   width:100%;
   max-width:360px;
-  aspect-ratio: 9 / 16;   /* สำคัญมากสำหรับ 720×1280 */
-  object-fit: cover;
-  background:#fff;
-  border-radius:16px;
+  margin:0 auto 1.2rem;
+}
+.illustration img{
+  width:100%;
+  height:auto;
+  display:block;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,.08));
 }
 
 /* ===== TEXT ===== */
-h1{
-  margin:.6rem 0 .2rem;
-}
-p{
-  opacity:.75;
-  margin:0;
+p.message{
+  margin:.6rem 0 1.1rem;
+  color:#555;
+  line-height:1.7;
 }
 
-/* ===== PROGRESS ===== */
-.progress{
-  width:100%;
-  height:4px;
-  background:#e5e5e5;
-  border-radius:99px;
-  margin:1rem auto 0;
-  overflow:hidden;
+p.verse{
+  margin:.6rem 0 1.4rem;
+  font-style:italic;
+  color:#333;
+  line-height:1.6;
 }
-.progress span{
-  display:block;
-  height:100%;
-  width:0;
+
+p.contact{
+  margin:.6rem 0 1.6rem;
+  font-size:.95rem;
+  color:#444;
+}
+
+/* ===== BUTTON ===== */
+a.home{
+  display:inline-block;
+  padding:.75rem 2rem;
+  border-radius:999px;
   background:#111;
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
 }
 
-/* motion sensitive */
-@media (prefers-reduced-motion: reduce){
-  .progress span{
-    animation:none!important;
-  }
+/* ===== LANG SWITCH ===== */
+.lang{
+  margin-top:1.4rem;
+  font-size:.9rem;
+}
+.lang button{
+  background:none;
+  border:none;
+  color:#666;
+  cursor:pointer;
+  margin:0 .35rem;
+}
+.lang button.active{
+  color:#000;
+  font-weight:600;
 }
 </style>
 </head>
 
 <body>
 
-<div class="wrapper">
+<main role="main">
 
-  <!-- 🎬 VIDEO 10s | 720×1280 -->
-  <video id="vid" autoplay muted playsinline>
-    <source src="404-10s-720x1280.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-
-  <h1>404</h1>
-  <p id="desc"></p>
-
-  <div class="progress">
-    <span id="bar"></span>
+  <!-- ===== LOGO ===== -->
+  <div class="logo">
+    <img src="logo.png" alt="โลโก้คริสตจักรสาวกพระเยซูกรุงเทพ">
   </div>
 
-</div>
+  <!-- ===== ILLUSTRATION ===== -->
+  <div class="illustration">
+    <img src="Group of People.svg" alt="คริสตจักรสาวกพระเยซูกรุงเทพยินดีต้อนรับผู้มาเยือน">
+  </div>
+
+  <!-- ===== MESSAGE ===== -->
+  <p id="message" class="message"></p>
+
+  <!-- ===== VERSE ===== -->
+  <p id="verse" class="verse"></p>
+
+  <!-- ===== CONTACT ===== -->
+  <p id="contact" class="contact"></p>
+
+  <!-- ===== BUTTON ===== -->
+  <a id="home" class="home" href="/">กลับสู่หน้าหลักของคริสตจักร</a>
+
+  <!-- ===== LANGUAGE SWITCH ===== -->
+  <div class="lang" aria-label="Language switcher">
+    <button onclick="setLang('th')" id="btn-th">ไทย</button> ·
+    <button onclick="setLang('en')" id="btn-en">EN</button> ·
+    <button onclick="setLang('ko')" id="btn-ko">한국어</button>
+  </div>
+
+</main>
 
 <script>
-/* ===== LANGUAGE ===== */
-const lang = navigator.language || "en";
-
-const text = {
+/* ===== CHURCH CONTENT ===== */
+const content = {
   th:{
-    desc:"หน้านี้หายไปแล้ว กำลังพากลับหน้าแรก 🙂",
-    redirect:"/th/"
+    message:
+      "ขออภัย ไม่พบหน้าที่คุณกำลังค้นหา<br>" +
+      "หน้านี้อาจถูกย้ายหรือไม่สามารถเข้าถึงได้ในขณะนี้<br>" +
+      "เรายินดีพาคุณกลับสู่หน้าหลักของคริสตจักรสาวกพระเยซูกรุงเทพ",
+    verse:
+      "“เหตุฉะนั้นพวกท่านจงไปสร้างสาวกจากทุกประชาชาติ”<br>" +
+      "<strong>มัทธิว 28:19</strong>",
+    contact:
+      "🕊️ รอบนมัสการวันอาทิตย์ เวลา 10:00 – 12:00 น.<br>" +
+      "คริสตจักรสาวกพระเยซูกรุงเทพ (JDM Bangkok Thailand)",
+    home:"กลับสู่หน้าหลักของคริสตจักร",
+    link:"/th/"
   },
   en:{
-    desc:"This page is lost. Redirecting you home 🙂",
-    redirect:"/en/"
+    message:
+      "We’re sorry, the page you’re looking for could not be found.<br>" +
+      "The page may have been moved or is temporarily unavailable.<br>" +
+      "Please return to the homepage of Jesus Disciple Ministry Bangkok.",
+    verse:
+      "“Therefore go and make disciples of all nations.”<br>" +
+      "<strong>Matthew 28:19</strong>",
+    contact:
+      "🕊️ Sunday Worship Service: 10:00 – 12:00<br>" +
+      "Jesus Disciple Ministry Bangkok (JDM Bangkok Thailand)",
+    home:"Return to Church Homepage",
+    link:"/en/"
   },
   ko:{
-    desc:"페이지를 찾을 수 없습니다. 홈으로 이동합니다 🙂",
-    redirect:"/ko/"
+    message:
+      "죄송합니다. 요청하신 페이지를 찾을 수 없습니다.<br>" +
+      "페이지가 이동되었거나 현재 사용할 수 없습니다.<br>" +
+      "예수제자교회 방콕 홈페이지로 돌아가 주세요.",
+    verse:
+      "“그러므로 너희는 가서 모든 민족을 제자로 삼아라.”<br>" +
+      "<strong>마태복음 28:19</strong>",
+    contact:
+      "🕊️ 주일 예배: 오전 10:00 – 12:00<br>" +
+      "예수제자교회 방콕 (JDM Bangkok Thailand)",
+    home:"교회 홈페이지로 돌아가기",
+    link:"/ko/"
   }
 };
 
-const locale =
-  lang.startsWith("th") ? "th" :
-  lang.startsWith("ko") ? "ko" : "en";
+/* ===== SET LANGUAGE ===== */
+function setLang(lang){
+  const c = content[lang];
+  document.getElementById("message").innerHTML = c.message;
+  document.getElementById("verse").innerHTML = c.verse;
+  document.getElementById("contact").innerHTML = c.contact;
 
-document.getElementById("desc").textContent = text[locale].desc;
+  const home = document.getElementById("home");
+  home.textContent = c.home;
+  home.href = c.link;
 
-/* ===== VIDEO DURATION ===== */
-const DURATION = 10; // วิดีโอ 10 วิ
+  document.querySelectorAll(".lang button")
+    .forEach(b => b.classList.remove("active"));
+  document.getElementById("btn-"+lang).classList.add("active");
 
-/* ===== PROGRESS BAR ===== */
-const bar = document.getElementById("bar");
-bar.animate(
-  [{ width:"0%" }, { width:"100%" }],
-  {
-    duration: DURATION * 1000,
-    fill: "forwards",
-    easing: "linear"
-  }
-);
-
-/* ===== REDIRECT / SKIP ===== */
-let skipped = false;
-function goHome(){
-  if(skipped) return;
-  skipped = true;
-  location.href = text[locale].redirect;
+  document.documentElement.lang = lang;
 }
 
-// เล่นจบ 10 วิ → redirect
-setTimeout(goHome, DURATION * 1000);
-
-// คลิก / กดคีย์ = ข้ามทันที
-document.body.addEventListener("click", goHome);
-document.body.addEventListener("keydown", goHome);
+/* ===== AUTO DETECT ===== */
+const browserLang = navigator.language || "en";
+if(browserLang.startsWith("th")) setLang("th");
+else if(browserLang.startsWith("ko")) setLang("ko");
+else setLang("en");
 </script>
 
 </body>
