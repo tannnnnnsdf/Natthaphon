@@ -7,24 +7,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, follow" />
 
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Fade-in animation -->
   <style>
-    .fade-in {
+    /* ===== Animated Gradient Background ===== */
+    body {
+      background: linear-gradient(
+        120deg,
+        #eef2ff,
+        #fdf2f8,
+        #ecfeff
+      );
+      background-size: 300% 300%;
+      animation: gradientMove 20s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Fade + slide */
+    .fade {
       opacity: 0;
+      transform: translateY(16px);
       animation: fadeIn 0.8s ease-out forwards;
     }
+
     @keyframes fadeIn {
-      to { opacity: 1; }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Progress bar animation */
+    .progress {
+      animation: progressBar 10s linear forwards;
+    }
+
+    @keyframes progressBar {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    /* ===== Motion-sensitive users ===== */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+      body {
+        background: #f9fafb;
+      }
     }
   </style>
 </head>
 
-<body class="min-h-screen flex items-center justify-center bg-gray-50 text-gray-800">
+<body class="min-h-screen flex items-center justify-center text-gray-800 dark:bg-gray-900 dark:text-gray-200">
 
-  <div class="text-center max-w-md px-6 fade-in">
+  <div class="text-center max-w-md px-6 fade">
 
     <!-- Logo -->
     <img
@@ -34,7 +77,9 @@
     />
 
     <!-- 404 -->
-    <h1 class="text-6xl font-bold text-indigo-600 mb-4">404</h1>
+    <h1 class="text-6xl font-bold text-indigo-600 dark:text-indigo-400 mb-4">
+      404
+    </h1>
 
     <!-- Not found text -->
     <p class="text-lg mb-6" id="notFoundText">
@@ -43,11 +88,11 @@
 
     <!-- Bible verse -->
     <blockquote
-      class="text-sm text-gray-600 italic mb-8"
+      class="text-sm italic text-gray-600 dark:text-gray-400 mb-8"
       id="bibleVerse">
     </blockquote>
 
-    <!-- Back home -->
+    <!-- Button -->
     <a
       id="homeLink"
       href="/th/index.html"
@@ -55,16 +100,19 @@
       กลับหน้าแรก
     </a>
 
-    <!-- Countdown -->
-    <p class="text-xs text-gray-500 mt-4">
-      ระบบจะพาคุณกลับหน้าแรกใน
-      <span id="countdown">5</span> วินาที
+    <!-- Progress bar -->
+    <div class="mt-6 h-1 w-full bg-gray-300 dark:bg-gray-700 rounded overflow-hidden">
+      <div class="h-full bg-indigo-600 progress"></div>
+    </div>
+
+    <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
+      กำลังพาคุณกลับหน้าแรก…
     </p>
 
   </div>
 
   <script>
-    // ===== Detect browser language =====
+    // ===== Language detection =====
     const lang = (navigator.language || "th").toLowerCase();
 
     let basePath = "/th/";
@@ -89,18 +137,10 @@
     document.getElementById("bibleVerse").innerHTML = verse;
     document.getElementById("homeLink").href = basePath + "index.html";
 
-    // ===== Countdown + Redirect =====
-    let seconds = 5;
-    const countdownEl = document.getElementById("countdown");
-
-    const timer = setInterval(() => {
-      seconds--;
-      countdownEl.textContent = seconds;
-      if (seconds <= 0) {
-        clearInterval(timer);
-        window.location.href = basePath + "index.html";
-      }
-    }, 1000);
+    // ===== Redirect after 10 seconds =====
+    setTimeout(() => {
+      window.location.href = basePath + "index.html";
+    }, 10000);
   </script>
 
 </body>
