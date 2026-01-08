@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>404 | JDM Bangkok</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, follow" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fade-in animation -->
+  <style>
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gray-50 text-gray-800">
+
+  <div class="text-center max-w-md px-6 fade-in">
+
+    <!-- Logo -->
+    <img
+      src="https://www.tannatthaphon.online/logo.png"
+      alt="คริสตจักรสาวกพระเยซูกรุงเทพ"
+      class="mx-auto mb-6 h-20"
+    />
+
+    <!-- 404 -->
+    <h1 class="text-6xl font-bold text-indigo-600 mb-4">404</h1>
+
+    <!-- Not found text -->
+    <p class="text-lg mb-6" id="notFoundText">
+      ไม่พบหน้านี้
+    </p>
+
+    <!-- Bible verse -->
+    <blockquote
+      class="text-sm text-gray-600 italic mb-8"
+      id="bibleVerse">
+    </blockquote>
+
+    <!-- Back home -->
+    <a
+      id="homeLink"
+      href="/th/index.html"
+      class="inline-block px-6 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition">
+      กลับหน้าแรก
+    </a>
+
+    <!-- Countdown -->
+    <p class="text-xs text-gray-500 mt-4">
+      ระบบจะพาคุณกลับหน้าแรกใน
+      <span id="countdown">5</span> วินาที
+    </p>
+
+  </div>
+
+  <script>
+    // ===== Detect browser language =====
+    const lang = (navigator.language || "th").toLowerCase();
+
+    let basePath = "/th/";
+    let notFoundText = "ไม่พบหน้านี้";
+    let verse =
+      "“จงวางใจในพระเจ้าเถิด แล้วพระองค์จะทรงนำทางของท่าน”<br>(สุภาษิต 3:5–6)";
+
+    if (lang.startsWith("en")) {
+      basePath = "/en/";
+      notFoundText = "Page not found";
+      verse =
+        "“Trust in the Lord with all your heart.”<br>(Proverbs 3:5–6)";
+    } else if (lang.startsWith("ko")) {
+      basePath = "/ko/";
+      notFoundText = "페이지를 찾을 수 없습니다";
+      verse =
+        "“너는 마음을 다하여 여호와를 신뢰하라.”<br>(잠언 3:5–6)";
+    }
+
+    document.documentElement.lang = basePath.replace(/\//g, "");
+    document.getElementById("notFoundText").innerHTML = notFoundText;
+    document.getElementById("bibleVerse").innerHTML = verse;
+    document.getElementById("homeLink").href = basePath + "index.html";
+
+    // ===== Countdown + Redirect =====
+    let seconds = 5;
+    const countdownEl = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+      seconds--;
+      countdownEl.textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(timer);
+        window.location.href = basePath + "index.html";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
