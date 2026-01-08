@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>คริสตจักรสาวกพระเยซูกรุงเทพ (JDM Bangkok) | นมัสการวันอาทิตย์ 10:00–12:00 น.</title>
     <meta name="description" content="คริสตจักรสาวกพระเยซูกรุงเทพ (JDM Bangkok) คริสตจักรท้องถิ่นย่านรามคำแหง นมัสการวันอาทิตย์ 10:00–12:00 น.">
     <meta name="author" content="Natthaphon Jaroenthat">
@@ -31,7 +30,7 @@
     <meta property="og:locale" content="th_TH">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
     <script src="/_sdk/element_sdk.js" defer></script>
     <style>@view-transition { navigation: auto; }</style>
@@ -46,6 +45,7 @@
       "alternateName": ["คริสตจักรสาวกพระเยซูกรุงเทพ","JDM Bangkok", "JDMBKK", "JDM TH"],
       "image": "https://www.tannatthaphon.online/cover.webp",
       "telephone": "+66 092 552 0263",
+      "hasMap": "https://maps.google.com/?q=13.753303,100.619074",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "64 ซอยรามคำแหง 24 แยก 6",
@@ -86,13 +86,24 @@
    <header class="site-header">
     <div class="header-inner">
      <div class="church-logo">
-      <svg class="logo-icon" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L12 10M12 10L16 6M12 10L8 6" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <path d="M7 10L7 22M17 10L17 22" stroke="#667eea" stroke-width="2" stroke-linecap="round" /> <path d="M4 22L20 22" stroke="#667eea" stroke-width="2" stroke-linecap="round" /> <rect x="10" y="14" width="4" height="8" stroke="#667eea" stroke-width="2" />
-      </svg><span class="church-name-header" id="headerChurchName">คริสตจักรชีวิตใหม่</span>
+  <img 
+    src="https://www.tannatthaphon.online/logo.png"
+    alt="คริสตจักรสาวกพระเยซูกรุงเทพ"
+    class="logo-img"/>
+  <span class="church-name-header" id="headerChurchName">คริสตจักรสาวกพระเยซูกรุงเทพ</span>
      </div>
      <div class="nav-actions">
-      <div class="lang-switch" id="langSwitch"><button class="lang-current" id="langCurrent" aria-label="เปลี่ยนภาษา"> <span id="currentLang">TH</span> <span class="lang-arrow">▼</span> </button>
-       <div class="lang-dropdown"><button class="lang-option active-lang" data-lang="th">ไทย (TH)</button> <button class="lang-option" data-lang="en">English (EN)</button> <button class="lang-option" data-lang="ko">한국어 (KO)</button>
-       </div>
+      <div class="lang-switch">
+  <button class="lang-current" aria-label="เปลี่ยนภาษา">
+    TH <span class="lang-arrow">▼</span>
+  </button>
+  <div class="lang-dropdown">
+    <a href="../th/index.html" class="lang-option">TH</a>
+    <a href="../en/index.html" class="lang-option">EN</a>
+    <a href="../ko/index.html" class="lang-option">KO</a>
+  </div>
+</div>
+
       </div><button class="menu-btn" id="menuBtn" aria-label="เปิดเมนู">
        <svg class="menu-icon" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12H21M3 6H21M3 18H21" stroke="#2c3e50" stroke-width="2" stroke-linecap="round" />
        </svg></button>
@@ -107,24 +118,11 @@
      </div><button class="close-btn" id="closeBtn" aria-label="ปิดเมนู">×</button>
     </div>
     <div class="menu-items">
-     <div class="menu-item">
-      ��น้าแรก
-     </div>
-     <div class="menu-item">
-      เกี่ยวกับเรา
-     </div>
-     <div class="menu-item">
-      คำเทศนา
-     </div>
-     <div class="menu-item">
-      ��ลุ่มสร้างสาวก
-     </div>
-     <div class="menu-item">
-      กิจกรรม
-     </div>
-     <div class="menu-item">
-      ติดต่อเรา
-     </div>
+  <a href="index.html" class="menu-item">Home</a>
+  <a href="about.html" class="menu-item">About</a>
+  <a href="worship.html" class="menu-item">Worship</a>
+  <a href="contact.html" class="menu-item">Contact</a>
+</div>
     </div>
    </div><!-- Hero Section -->
    <section class="hero-wrapper">
@@ -237,4 +235,3 @@
 </body>
   
 </html>
-
