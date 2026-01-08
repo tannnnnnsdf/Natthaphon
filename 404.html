@@ -10,12 +10,8 @@
 <meta name="robots" content="noindex, follow" />
 <meta name="description" content="ไม่พบหน้าที่คุณกำลังค้นหา กรุณากลับสู่หน้าหลักของคริสตจักรสาวกพระเยซูกรุงเทพ (JDM Bangkok Thailand)" />
 
-<meta property="og:title" content="ไม่พบหน้านี้ | คริสตจักรสาวกพระเยซูกรุงเทพ" />
-<meta property="og:description" content="เรายินดีต้อนรับคุณกลับสู่หน้าหลักของคริสตจักรสาวกพระเยซูกรุงเทพ" />
-<meta property="og:type" content="website" />
-
 <style>
-/* ===== BASE ===== */
+/* ===== BASE (Mobile-first) ===== */
 body{
   margin:0;
   min-height:100vh;
@@ -25,61 +21,67 @@ body{
   background:#ffffff;
   color:#111;
   font-family:system-ui,-apple-system,sans-serif;
-  text-align:center;
 }
 
 main{
-  max-width:520px;
-  padding:1.5rem;
+  width:100%;
+  max-width:420px;           /* คุมให้พอดีมือถือ */
+  padding:1.25rem 1rem;
+  box-sizing:border-box;
+  text-align:center;
 }
 
 /* ===== LOGO ===== */
 .logo{
-  width:120px;
-  margin:0 auto 1rem;
+  width:96px;                /* เล็กลง เหมาะมือถือ */
+  margin:0 auto .75rem;
 }
 .logo img{
   width:100%;
   height:auto;
 }
 
-/* ===== ILLUSTRATION ===== */
+/* ===== ILLUSTRATION (SVG) ===== */
 .illustration{
   width:100%;
   max-width:360px;
-  margin:0 auto 1.2rem;
+  margin:0 auto 1rem;
 }
 .illustration img{
   width:100%;
   height:auto;
   display:block;
-  filter: drop-shadow(0 12px 24px rgba(0,0,0,.08));
+  /* ❌ ไม่ใส่เงา */
 }
 
 /* ===== TEXT ===== */
 p.message{
-  margin:.6rem 0 1.1rem;
-  color:#555;
-  line-height:1.7;
+  margin:.5rem 0 .9rem;
+  color:#444;
+  line-height:1.65;
+  font-size:.95rem;
 }
 
 p.verse{
-  margin:.6rem 0 1.4rem;
+  margin:.5rem 0 1.1rem;
   font-style:italic;
   color:#333;
   line-height:1.6;
+  font-size:.95rem;
 }
 
 p.contact{
-  margin:.6rem 0 1.6rem;
-  font-size:.95rem;
+  margin:.4rem 0 1.3rem;
+  font-size:.9rem;
   color:#444;
 }
 
 /* ===== BUTTON ===== */
 a.home{
   display:inline-block;
-  padding:.75rem 2rem;
+  width:100%;                /* ปุ่มเต็มความกว้างมือถือ */
+  max-width:320px;
+  padding:.75rem 1rem;
   border-radius:999px;
   background:#111;
   color:#fff;
@@ -89,19 +91,34 @@ a.home{
 
 /* ===== LANG SWITCH ===== */
 .lang{
-  margin-top:1.4rem;
-  font-size:.9rem;
+  margin-top:1.1rem;
+  font-size:.85rem;
 }
 .lang button{
   background:none;
   border:none;
   color:#666;
   cursor:pointer;
-  margin:0 .35rem;
+  margin:0 .3rem;
 }
 .lang button.active{
   color:#000;
   font-weight:600;
+}
+
+/* ===== DESKTOP TWEAK ===== */
+@media (min-width:768px){
+  main{
+    max-width:520px;
+    padding:1.75rem;
+  }
+  .logo{
+    width:120px;
+  }
+  a.home{
+    width:auto;
+    padding:.75rem 2rem;
+  }
 }
 </style>
 </head>
@@ -115,9 +132,9 @@ a.home{
     <img src="logo.png" alt="โลโก้คริสตจักรสาวกพระเยซูกรุงเทพ">
   </div>
 
-  <!-- ===== ILLUSTRATION ===== -->
+  <!-- ===== SVG (STATIC / WHITE BG) ===== -->
   <div class="illustration">
-    <img src="Group of People.svg" alt="คริสตจักรสาวกพระเยซูกรุงเทพยินดีต้อนรับผู้มาเยือน">
+    <img src="Group of People.svg" alt="คริสตจักรสาวกพระเยซูกรุงเทพยินดีต้อนรับผู้มาเยือนเว็บไซต์">
   </div>
 
   <!-- ===== MESSAGE ===== -->
@@ -142,7 +159,7 @@ a.home{
 </main>
 
 <script>
-/* ===== CHURCH CONTENT ===== */
+/* ===== CONTENT ===== */
 const content = {
   th:{
     message:
