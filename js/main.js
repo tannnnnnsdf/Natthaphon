@@ -237,16 +237,36 @@
 
     }
 
+
+/* แสดง cookie banner ครั้งแรก */
 (function () {
   const consent = localStorage.getItem('cookie_consent');
-  if (!consent) {
-    const banner = document.getElementById('cookieBanner');
-    if (banner) banner.hidden = false;
+  const banner = document.getElementById('cookieBanner');
+  if (!consent && banner) {
+    banner.hidden = false;
   }
 })();
 
+/* กดยอมรับคุกกี้ */
 function acceptCookies() {
   localStorage.setItem('cookie_consent', 'accepted');
   const banner = document.getElementById('cookieBanner');
   if (banner) banner.hidden = true;
+}
+
+/* เปิด policy เป็น popup */
+function openPolicy(url) {
+  fetch(url)
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('policyContent').innerHTML = html;
+      document.getElementById('policyModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+}
+
+/* ปิด popup */
+function closePolicy() {
+  document.getElementById('policyModal').classList.remove('active');
+  document.body.style.overflow = '';
 }
