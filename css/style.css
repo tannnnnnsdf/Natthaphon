@@ -745,9 +745,7 @@ body {
       .nav-link::after {
         display: none;
       }
-      
-      .dropdown-toggle {
-          .dropdown-toggle {
+  .dropdown-toggle {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -811,5 +809,14 @@ body {
       
       .service-card {
         padding: 30px 20px;
+      }
+      .service-card-title {
+        font-size: 20px;
+      }
+      .mission-title {
+        font-size: 28px;
+      }
+      .mission-item-title {
+        font-size: 20px;
       }
     }
