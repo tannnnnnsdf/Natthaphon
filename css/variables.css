@@ -1,0 +1,68 @@
+ :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #f59e0b;
+      --surface: #ffffff;
+      --surface-dark: #f8fafc;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Noto Sans Fonts */
+    @font-face {
+      font-family: 'Noto Sans';
+      src: url('../assets/fonts/Noto_Sans/NotoSans-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Noto Sans';
+      src: url('../assets/fonts/Noto_Sans/NotoSans-SemiBold.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Noto Sans Thai';
+      src: url('../assets/fonts/Noto_Sans_Thai/NotoSansThai-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Noto Sans Thai';
+      src: url('../assets/fonts/Noto_Sans_Thai/NotoSansThai-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Noto Sans Thai';
+      src: url('../assets/fonts/Noto_Sans_Thai/NotoSansThai-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Noto Sans KR';
+      src: url('../assets/fonts/Noto_Sans_KR/NotoSansKR-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Noto Sans KR';
+      src: url('../assets/fonts/Noto_Sans_KR/NotoSansKR-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
