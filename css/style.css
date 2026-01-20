@@ -819,4 +819,43 @@ body {
       .mission-item-title {
         font-size: 20px;
       }
+
     }
+
+.policy-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 10000;
+}
+
+.policy-modal.active {
+  display: block;
+}
+
+.policy-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+}
+
+.policy-dialog {
+  max-width: 900px;
+  max-height: 85vh;
+  margin: 5vh auto;
+  background: #fff;
+  padding: 32px;
+  border-radius: 12px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.policy-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
