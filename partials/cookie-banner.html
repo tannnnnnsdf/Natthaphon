@@ -1,10 +1,14 @@
+<!-- Cookie Banner -->
 <div id="cookieBanner" class="cookie-banner font-th" hidden>
   <p>
     เว็บไซต์นี้ใช้คุกกี้เพื่อปรับปรุงประสบการณ์การใช้งาน  
-    <a href="https://www.tannatthaphon.online/privacy-policy" target="_blank">
+    <a href="/privacy-policy.html"
+       onclick="event.preventDefault(); openPolicy('/privacy-policy.html')">
       นโยบายความเป็นส่วนตัว
-    </a> |
-    <a href="https://www.tannatthaphon.online/terms-of-service" target="_blank">
+    </a>
+    |
+    <a href="/terms-of-service.html"
+       onclick="event.preventDefault(); openPolicy('/terms-of-service.html')">
       ข้อกำหนดการใช้งาน
     </a>
   </p>
@@ -12,4 +16,14 @@
   <button class="cookie-accept" onclick="acceptCookies()">
     ยอมรับ
   </button>
+</div>
+
+<!-- Policy Modal -->
+<div id="policyModal" class="policy-modal">
+  <div class="policy-overlay" onclick="closePolicy()"></div>
+
+  <div class="policy-dialog">
+    <button class="policy-close" onclick="closePolicy()">✕</button>
+    <div id="policyContent"></div>
+  </div>
 </div>
