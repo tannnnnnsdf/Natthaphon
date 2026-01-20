@@ -234,4 +234,19 @@
         mapToCapabilities,
         mapToEditPanelValues
       });
+
     }
+
+(function () {
+  const consent = localStorage.getItem('cookie_consent');
+  if (!consent) {
+    const banner = document.getElementById('cookieBanner');
+    if (banner) banner.hidden = false;
+  }
+})();
+
+function acceptCookies() {
+  localStorage.setItem('cookie_consent', 'accepted');
+  const banner = document.getElementById('cookieBanner');
+  if (banner) banner.hidden = true;
+}
