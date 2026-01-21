@@ -220,16 +220,3 @@
       });
 
     }
-
-  // Prayer Form submission
-    document.getElementById('prayerForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const formSuccess = document.getElementById('prayerSuccess');
-      formSuccess.classList.add('show');
-      this.reset();
-      
-      setTimeout(() => {
-        formSuccess.classList.remove('show');
-      }, 5000);
-    });
