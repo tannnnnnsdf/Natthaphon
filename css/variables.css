@@ -1,7 +1,7 @@
  :root {
-      --primary: #2563eb;
-      --primary-dark: #1e40af;
-      --primary-light: #3b82f6;
+      --primary: #31547c;
+      --primary-dark: #31547c;
+      --primary-light: #31547c;
       --accent: #f59e0b;
       --surface: #ffffff;
       --surface-dark: #f8fafc;
@@ -65,4 +65,5 @@
       font-weight: 700;
       font-style: normal;
       font-display: swap;
+
     }
