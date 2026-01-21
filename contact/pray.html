@@ -138,7 +138,11 @@
   </button>
 </form>
 
-<iframe name="hidden_iframe" style="display:none;"></iframe>
+<iframe
+  name="hidden_iframe"
+  id="hidden_iframe"
+  style="display:none;"
+></iframe>
 
      </div>
      <div class="prayer-info-card">
@@ -164,12 +168,25 @@
   </main>
  <div data-include="https://www.tannatthaphon.online/partials/footer.html"></div>
   <script>
-document.getElementById("prayerForm").addEventListener("submit", () => {
+const form = document.getElementById("prayerForm");
+const successBox = document.getElementById("prayerSuccess");
+const iframe = document.getElementById("hidden_iframe");
+
+// ซ่อนไว้ก่อน
+successBox.style.display = "none";
+
+iframe.onload = function () {
+  // เคลียร์ฟอร์ม
+  form.reset();
+
+  // แสดงข้อความสำเร็จ
+  successBox.style.display = "block";
+
+  // ซ่อนข้อความหลัง 5 วิ (ถ้าต้องการ)
   setTimeout(() => {
-    const successBox = document.getElementById("prayerSuccess");
-    successBox.style.display = "block";
-  }, 500);
-});
+    successBox.style.display = "none";
+  }, 5000);
+};
 </script>
 
   <script src="https://www.tannatthaphon.online/js/main.js"></script>
@@ -181,6 +198,7 @@ document.getElementById("prayerForm").addEventListener("submit", () => {
     </body>
 
 </html>
+
 
 
 
