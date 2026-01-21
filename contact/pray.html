@@ -100,56 +100,46 @@
      <div class="prayer-request-card">
       <form
   id="prayerForm"
-  action="https://docs.google.com/forms/d/e/1FyCwsLFgf_p1tATns8BJ1-LldnWGi9phjBIiyKcIuIc/formResponse"
+  action="https://docs.google.com/forms/d/e/1FAIpQLScSk2nP6135-2BRWWIseYDiOn5-dcSZxpGv2DS2bPE6EPMWrA/formResponse"
   method="POST"
   target="hidden_iframe"
 >
   <div class="form-group">
-    <label for="prayer-name">ชื่อของคุณ</label>
+    <label>ชื่อของคุณ</label>
     <input
       type="text"
-      id="prayer-name"
       name="entry.1480419693"
       class="form-control"
-      placeholder="กรอกชื่อของคุณ"
       required
     >
   </div>
 
   <div class="form-group">
-    <label for="prayer-email">อีเมล (ถ้ามี)</label>
+    <label>อีเมล (ถ้ามี)</label>
     <input
       type="email"
-      id="prayer-email"
       name="entry.168755387"
       class="form-control"
-      placeholder="your@email.com"
     >
   </div>
 
   <div class="form-group">
-    <label for="prayer-request">คำขออธิษฐาน</label>
+    <label>คำขออธิษฐาน</label>
     <textarea
-      id="prayer-request"
       name="entry.956990530"
       class="form-control"
-      placeholder="แบ่งปันสิ่งที่ต้องการให้เราอธิษฐานเผื่อ..."
-      required
       rows="6"
+      required
     ></textarea>
   </div>
 
-  <button type="submit" class="btn btn-primary" style="width: 100%;">
+  <button type="submit" class="btn btn-primary" style="width:100%;">
     🙏 ส่งคำขออธิษฐาน
   </button>
-
-  <div id="prayerSuccess" class="form-success" style="display:none;">
-    <strong>✅ ส่งคำขออธิษฐานสำเร็จ!</strong><br>
-    เราจะอธิษฐานเผื่อคุณ พระเจ้าทรงรักคุณ ❤️
-  </div>
 </form>
 
 <iframe name="hidden_iframe" style="display:none;"></iframe>
+
      </div>
      <div class="prayer-info-card">
       <div class="prayer-info-icon">
@@ -174,25 +164,11 @@
   </main>
  <div data-include="https://www.tannatthaphon.online/partials/footer.html"></div>
   <script>
-      // Prayer Form submission
-    document.getElementById('prayerForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const formSuccess = document.getElementById('prayerSuccess');
-      formSuccess.classList.add('show');
-      this.reset();
-      
-      setTimeout(() => {
-        formSuccess.classList.remove('show');
-      }, 5000);
-    });
-
-  </script>
-  <script>
 document.getElementById("prayerForm").addEventListener("submit", () => {
   setTimeout(() => {
-    document.getElementById("prayerSuccess").style.display = "block";
-  }, 600);
+    const successBox = document.getElementById("prayerSuccess");
+    successBox.style.display = "block";
+  }, 500);
 });
 </script>
 
@@ -205,6 +181,7 @@ document.getElementById("prayerForm").addEventListener("submit", () => {
     </body>
 
 </html>
+
 
 
 
