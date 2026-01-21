@@ -284,3 +284,39 @@ function closePolicy() {
       }, 5000);
     });
 
+(function () {
+  const banner = document.getElementById("cookie-banner");
+  const acceptBtn = document.getElementById("accept-cookie");
+  const rejectBtn = document.getElementById("reject-cookie");
+  const closeBtn  = document.getElementById("close-cookie-banner");
+
+  const COOKIE_KEY = "cookieConsent"; 
+  // ค่า: accepted | rejected
+
+  // ถ้ามีการตัดสินใจแล้ว ไม่ต้องแสดง
+  const consent = localStorage.getItem(COOKIE_KEY);
+  if (consent === "accepted" || consent === "rejected") {
+    banner.style.display = "none";
+    return;
+  }
+
+  // ยอมรับ
+  acceptBtn.addEventListener("click", function () {
+    localStorage.setItem(COOKIE_KEY, "accepted");
+    banner.style.display = "none";
+
+    // ถ้ามี Analytics / Script อื่น
+    // initAnalytics();
+  });
+
+  // ปฏิเสธ
+  rejectBtn.addEventListener("click", function () {
+    localStorage.setItem(COOKIE_KEY, "rejected");
+    banner.style.display = "none";
+  });
+
+  // ปิดเฉย ๆ (ยังไม่เลือก)
+  closeBtn.addEventListener("click", function () {
+    banner.style.display = "none";
+  });
+})();
