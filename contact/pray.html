@@ -187,6 +187,7 @@ iframe.onload = function () {
     successBox.style.display = "none";
   }, 5000);
 };
+   document.getElementById('prayerForm').addEventListener('submit', function(e) { e.preventDefault(); const formSuccess = document.getElementById('prayerSuccess'); formSuccess.classList.add('show'); this.reset(); setTimeout(() => { formSuccess.classList.remove('show'); }, 5000); }); </script> <script> document.getElementById("prayerForm").addEventListener("submit", () => { setTimeout(() => { document.getElementById("prayerSuccess").style.display = "block"; }, 600); });
 </script>
 
   <script src="https://www.tannatthaphon.online/js/main.js"></script>
@@ -198,6 +199,7 @@ iframe.onload = function () {
     </body>
 
 </html>
+
 
 
 
