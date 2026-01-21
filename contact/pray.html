@@ -133,7 +133,19 @@
   </main>
  <div data-include="https://www.tannatthaphon.online/partials/footer.html"></div>
   <script>
-    
+      // Prayer Form submission
+    document.getElementById('prayerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formSuccess = document.getElementById('prayerSuccess');
+      formSuccess.classList.add('show');
+      this.reset();
+      
+      setTimeout(() => {
+        formSuccess.classList.remove('show');
+      }, 5000);
+    });
+
   </script>
   <script src="https://www.tannatthaphon.online/js/main.js"></script>
   <script src="https://www.tannatthaphon.online/js/analytics.js"></script>
@@ -144,3 +156,4 @@
     </body>
 
 </html>
+
