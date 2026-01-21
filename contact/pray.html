@@ -146,6 +146,7 @@
   <strong>✅ ส่งคำขออธิษฐานสำเร็จ!</strong><br>
   เราจะอธิษฐานเผื่อคุณ พระเจ้าทรงรักคุณ ❤️
 </div>
+      <iframe id="hidden_iframe" name="hidden_iframe" style="display:none;"></iframe>
 
      </div>
      <div class="prayer-info-card">
@@ -178,18 +179,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!form || !successBox || !iframe) return;
 
-  // ซ่อนข้อความไว้ก่อน
+  // ซ่อนข้อความก่อน
   successBox.style.display = "none";
 
-  // เมื่อ Google Form ส่งเสร็จ (iframe โหลด)
   iframe.onload = () => {
-    // เคลียร์ฟอร์ม
+    // reset ฟอร์ม
     form.reset();
 
-    // แสดงข้อความ “เราจะอธิษฐานเผื่อคุณ”
+    // แสดงข้อความสำเร็จ
     successBox.style.display = "block";
 
-    // ซ่อนหลัง 5 วินาที
+    // ซ่อนหลัง 5 วิ
     setTimeout(() => {
       successBox.style.display = "none";
     }, 5000);
@@ -208,6 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </body>
 
 </html>
+
 
 
 
