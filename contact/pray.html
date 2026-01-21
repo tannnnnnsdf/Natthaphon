@@ -71,6 +71,17 @@
 <link rel="stylesheet" href="https://www.tannatthaphon.online/css/variables.css">
 <link rel="stylesheet" href="https://www.tannatthaphon.online/css/home.css">
   <style>@view-transition { navigation: auto; }</style> 
+  <style>
+   .form-success {
+  display: none;
+  margin-top: 20px;
+  background: #ecfdf5;
+  border: 1px solid #10b981;
+  padding: 16px;
+  border-radius: 10px;
+  color: #065f46;
+}
+</style>
  </head>
  <body>
   <div data-include="https://www.tannatthaphon.online/partials/header.html"></div>
@@ -147,6 +158,38 @@
     });
 
   </script>
+  <script>
+const form = document.getElementById("prayerForm");
+const successBox = document.getElementById("prayerSuccess");
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const data = {
+    name: document.getElementById("prayer-name").value,
+    email: document.getElementById("prayer-email").value,
+    prayer: document.getElementById("prayer-request").value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbx5nGlgNaVPc5VRDkVfoNKoceFIbsSe2bmWVOpPXclZrIBn0WhQGFlOU7zFYiw8VEY_/exec", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(res => res.json())
+  .then(result => {
+    if (result.status === "success") {
+      form.reset();
+      successBox.style.display = "block";
+    }
+  })
+  .catch(() => {
+    alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+  });
+});
+</script>
   <script src="https://www.tannatthaphon.online/js/main.js"></script>
   <script src="https://www.tannatthaphon.online/js/analytics.js"></script>
   <script src="https://www.tannatthaphon.online/js/form-handler.js"></script>
@@ -156,4 +199,5 @@
     </body>
 
 </html>
+
 
