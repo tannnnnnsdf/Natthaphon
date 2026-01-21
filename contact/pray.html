@@ -71,17 +71,6 @@
 <link rel="stylesheet" href="https://www.tannatthaphon.online/css/variables.css">
 <link rel="stylesheet" href="https://www.tannatthaphon.online/css/home.css">
   <style>@view-transition { navigation: auto; }</style> 
-  <style>
-   .form-success {
-  display: none;
-  margin-top: 20px;
-  background: #ecfdf5;
-  border: 1px solid #10b981;
-  padding: 16px;
-  border-radius: 10px;
-  color: #065f46;
-}
-</style>
  </head>
  <body>
   <div data-include="https://www.tannatthaphon.online/partials/header.html"></div>
@@ -109,17 +98,58 @@
       </div>
     <div class="prayer-request-container">
      <div class="prayer-request-card">
-      <form id="prayerForm">
-       <div class="form-group"><label for="prayer-name">ชื่อของคุณ</label> <input type="text" id="prayer-name" class="form-control" placeholder="กรอกชื่อของคุณ" required>
-       </div>
-       <div class="form-group"><label for="prayer-email">อีเมล (ถ้ามี)</label> <input type="email" id="prayer-email" class="form-control" placeholder="your@email.com">
-       </div>
-       <div class="form-group"><label for="prayer-request">คำขออธิษฐาน</label> <textarea id="prayer-request" class="form-control" placeholder="แบ่งปันสิ่งที่ต้องการให้เราอธิษฐานเผื่อ..." required rows="6"></textarea>
-       </div><button type="submit" class="btn btn-primary" style="width: 100%;">🙏 ส่งคำขออธิษฐาน</button>
-       <div id="prayerSuccess" class="form-success"><strong>✅ ส่งคำขออธิษฐานสำเร็จ!</strong><br>
-         เราจะอธิษฐานเผื่อคุณ พระเจ้าทรงรักคุณ ❤️
-       </div>
-      </form>
+      <form
+  id="prayerForm"
+  action="https://docs.google.com/forms/d/e/1FyCwsLFgf_p1tATns8BJ1-LldnWGi9phjBIiyKcIuIc/formResponse"
+  method="POST"
+  target="hidden_iframe"
+>
+  <div class="form-group">
+    <label for="prayer-name">ชื่อของคุณ</label>
+    <input
+      type="text"
+      id="prayer-name"
+      name="entry.1480419693"
+      class="form-control"
+      placeholder="กรอกชื่อของคุณ"
+      required
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="prayer-email">อีเมล (ถ้ามี)</label>
+    <input
+      type="email"
+      id="prayer-email"
+      name="entry.168755387"
+      class="form-control"
+      placeholder="your@email.com"
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="prayer-request">คำขออธิษฐาน</label>
+    <textarea
+      id="prayer-request"
+      name="entry.956990530"
+      class="form-control"
+      placeholder="แบ่งปันสิ่งที่ต้องการให้เราอธิษฐานเผื่อ..."
+      required
+      rows="6"
+    ></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary" style="width: 100%;">
+    🙏 ส่งคำขออธิษฐาน
+  </button>
+
+  <div id="prayerSuccess" class="form-success" style="display:none;">
+    <strong>✅ ส่งคำขออธิษฐานสำเร็จ!</strong><br>
+    เราจะอธิษฐานเผื่อคุณ พระเจ้าทรงรักคุณ ❤️
+  </div>
+</form>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
      </div>
      <div class="prayer-info-card">
       <div class="prayer-info-icon">
@@ -159,37 +189,13 @@
 
   </script>
   <script>
-const form = document.getElementById("prayerForm");
-const successBox = document.getElementById("prayerSuccess");
-
-form.addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const data = {
-    name: document.getElementById("prayer-name").value,
-    email: document.getElementById("prayer-email").value,
-    prayer: document.getElementById("prayer-request").value
-  };
-
-  fetch("https://script.google.com/macros/s/AKfycbzx4h09J4N0ICnPOLd2_2PKGSuNOSj81w7JY68QNjGYSB3dmL0CPZRoP0gprqxdPRY8/exec", {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  .then(res => res.json())
-  .then(result => {
-    if (result.status === "success") {
-      form.reset();
-      successBox.style.display = "block";
-    }
-  })
-  .catch(() => {
-    alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
-  });
+document.getElementById("prayerForm").addEventListener("submit", () => {
+  setTimeout(() => {
+    document.getElementById("prayerSuccess").style.display = "block";
+  }, 600);
 });
 </script>
+
   <script src="https://www.tannatthaphon.online/js/main.js"></script>
   <script src="https://www.tannatthaphon.online/js/analytics.js"></script>
   <script src="https://www.tannatthaphon.online/js/form-handler.js"></script>
@@ -199,6 +205,7 @@ form.addEventListener("submit", function(e) {
     </body>
 
 </html>
+
 
 
 
