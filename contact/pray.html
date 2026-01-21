@@ -167,14 +167,15 @@
   </section>
   </main>
  <div data-include="https://www.tannatthaphon.online/partials/footer.html"></div>
-  <script>
+ <script>
 const form = document.getElementById("prayerForm");
 const successBox = document.getElementById("prayerSuccess");
 const iframe = document.getElementById("hidden_iframe");
 
-// ซ่อนไว้ก่อน
+// ซ่อนข้อความไว้ก่อน
 successBox.style.display = "none";
 
+// เมื่อ Google Form ส่งเสร็จ (iframe โหลด)
 iframe.onload = function () {
   // เคลียร์ฟอร์ม
   form.reset();
@@ -182,13 +183,13 @@ iframe.onload = function () {
   // แสดงข้อความสำเร็จ
   successBox.style.display = "block";
 
-  // ซ่อนข้อความหลัง 5 วิ (ถ้าต้องการ)
+  // ซ่อนข้อความหลัง 5 วินาที
   setTimeout(() => {
     successBox.style.display = "none";
   }, 5000);
 };
-   document.getElementById('prayerForm').addEventListener('submit', function(e) { e.preventDefault(); const formSuccess = document.getElementById('prayerSuccess'); formSuccess.classList.add('show'); this.reset(); setTimeout(() => { formSuccess.classList.remove('show'); }, 5000); }); </script> <script> document.getElementById("prayerForm").addEventListener("submit", () => { setTimeout(() => { document.getElementById("prayerSuccess").style.display = "block"; }, 600); });
 </script>
+
 
   <script src="https://www.tannatthaphon.online/js/main.js"></script>
   <script src="https://www.tannatthaphon.online/js/analytics.js"></script>
@@ -199,6 +200,7 @@ iframe.onload = function () {
     </body>
 
 </html>
+
 
 
 
