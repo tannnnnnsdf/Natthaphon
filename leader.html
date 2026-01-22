@@ -133,33 +133,6 @@
 
 </main>
 <script>
-  // สคริปต์เสริมสำหรับจัดการลิงก์ป๊อปอัพ //
-  document.addEventListener('DOMContentLoaded', () => {
-    const popupLinks = document.querySelectorAll('.popup-link');
-    popupLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const content = link.getAttribute('data-popup-content');
-        const popupWindow = window.open('', 'popup', 'width=600,height=400,scrollbars=yes');
-        popupWindow.document.write(`
-          <html>
-            <head>
-              <title>ข้อมูลเพิ่มเติม</title>
-              <style>
-                body { font-family: Arial, sans-serif; padding: 20px; }
-                h2 { color: var(--primary); }
-                p { line-height: 1.6; }
-              </style>
-            </head>
-            <body>
-              ${content}
-              <button onclick="window.close()">ปิดหน้าต่าง</button>
-            </body>
-          </html>
-        `);
-      });
-    });
-  });
 </script>
 </body>
 </html>
