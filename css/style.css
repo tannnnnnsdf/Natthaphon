@@ -413,7 +413,7 @@ body {
     }
 
     .intro-card::before {
-      content: '✝️';
+
       font-size: 6rem;
       position: absolute;
       top: 30px;
@@ -545,7 +545,7 @@ body {
       color: white;
       font-size: 2rem;
       font-weight: 700;
-      font-family: 'Playfair Display', serif;
+
     }
 
     .step-content h3 {
@@ -1345,5 +1345,4 @@ body {
     .btn-secondary:hover {
       background-color: #da190b;
     }
-
 
