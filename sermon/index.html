@@ -86,9 +86,59 @@
        MAIN BODY CONTENT (ส่วนเนื้อหาหลัก)
   ======================================== -->
   <main class="main-content">
-    <h1>ทดสอบเทศนา
-      เน้นะนภ
-      ะตน้น่<h1>
+    <h1>คำเทศนาประจำสัปดาห์</h1>
+
+<div class="grid" id="sermonGrid"></div>
+
+<script>
+  const sermonFiles = [
+    '20260125.html',
+    '20260202.html',
+    '20260301.html'
+  ];
+
+  const grid = document.getElementById('sermonGrid');
+
+  Promise.all(
+    sermonFiles.map(file =>
+      fetch(file)
+        .then(res => res.text())
+        .then(html => {
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+
+          return {
+            file,
+            date: doc.querySelector('meta[name="sermon-date"]').content,
+            title: doc.querySelector('meta[name="sermon-title"]').content,
+            speaker: doc.querySelector('meta[name="sermon-speaker"]').content,
+            iframe: doc.querySelector('iframe').outerHTML
+          };
+        })
+    )
+  ).then(sermons => {
+
+    // 🔥 เรียงวันที่ล่าสุดขึ้นก่อน
+    sermons
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .forEach(s => {
+
+        const card = document.createElement('article');
+        card.className = 'card';
+
+        card.innerHTML = `
+          ${s.iframe}
+          <div class="content">
+            <div class="date">${s.date}</div>
+            <div class="title">${s.title}</div>
+            <div class="speaker">ผู้เทศนา: ${s.speaker}</div>
+            <a class="read" href="${s.file}">อ่านคำเทศนา →</a>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+  });
+</script>
   </main>
   <div data-include="https://www.tannatthaphon.online/partials/footer.html"></div>
 
@@ -103,3 +153,4 @@
     </body>
 
 </html>
+
