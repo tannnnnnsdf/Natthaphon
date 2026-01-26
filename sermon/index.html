@@ -71,6 +71,20 @@
 <link rel="stylesheet" href="https://www.tannatthaphon.online/css/variables.css">
 <link rel="stylesheet" href="https://www.tannatthaphon.online/css/home.css">
   <style>@view-transition { navigation: auto; }</style> 
+  <style>
+   .sermon-list { background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .sermon-item { 
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px; border-bottom: 1px solid #eee; text-decoration: none; color: #333;
+            transition: 0.3s;
+        }
+        .sermon-item:hover { background: #f9f9f9; transform: translateX(5px); }
+        .info-main { display: flex; flex-direction: column; }
+        .title { font-weight: bold; color: #2c3e50; font-size: 1.1em; }
+        .speaker { color: #7f8c8d; font-size: 0.9em; }
+        .date { font-weight: bold; color: #3498db; min-width: 120px; text-align: right; }
+        .loading { text-align: center; padding: 20px; color: #888; }
+  </style>
  </head>
  <body>
   <div data-include="https://www.tannatthaphon.online/partials/header.html"></div>
@@ -86,57 +100,72 @@
        MAIN BODY CONTENT (ส่วนเนื้อหาหลัก)
   ======================================== -->
   <main class="main-content">
-    <h1>คำเทศนาประจำสัปดาห์</h1>
-
-<div class="grid" id="sermonGrid"></div>
+   <div class="container">
+    <h1>คลังบทเทศนาล่าสุด (2026)</h1>
+    <div id="sermon-container" class="sermon-list">
+        <div class="loading">กำลังโหลดรายการบทเทศนา...</div>
+    </div>
+</div>
 
 <script>
-  const sermonFiles = [
-    '20260125.html',
-    '20260202.html'
-  ];
+    // 1. ระบุชื่อไฟล์ที่คุณมี (เรียงจากเก่าไปใหม่ หรืออย่างไรก็ได้)
+    const sermonFiles = [
+        "sermons/20260125.html",
+        "sermons/20260202.html"
+    ];
 
-  const grid = document.getElementById('sermonGrid');
+    async function loadSermons() {
+        const container = document.getElementById('sermon-container');
+        let sermonData = [];
 
-  Promise.all(
-    sermonFiles.map(file =>
-      fetch(file)
-        .then(res => res.text())
-        .then(html => {
-          const doc = new DOMParser().parseFromString(html, 'text/html');
+        // 2. วนลูปอ่านข้อมูลจากแต่ละไฟล์
+        for (const file of sermonFiles) {
+            try {
+                const response = await fetch(file);
+                const text = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
 
-          return {
-            file,
-            date: doc.querySelector('meta[name="sermon-date"]').content,
-            title: doc.querySelector('meta[name="sermon-title"]').content,
-            speaker: doc.querySelector('meta[name="sermon-speaker"]').content,
-            iframe: doc.querySelector('iframe').outerHTML
-          };
-        })
-    )
-  ).then(sermons => {
+                // ดึงข้อมูลจาก ID ที่เราตั้งไว้ในไฟล์ลูก
+                const title = doc.getElementById('sermon-title')?.innerText || "ไม่มีชื่อหัวข้อ";
+                const dateText = doc.getElementById('sermon-date')?.innerText || "ไม่ระบุวันที่";
+                const speaker = doc.getElementById('sermon-speaker')?.innerText || "ไม่ระบุผู้เทศนา";
+                
+                // เก็บข้อมูลในรูปแบบ Object
+                sermonData.push({
+                    url: file,
+                    title: title,
+                    dateText: dateText,
+                    speaker: speaker,
+                    // แปลงชื่อไฟล์เป็นตัวเลขเพื่อใช้เรียงลำดับ (เช่น 20260125)
+                    rawDate: parseInt(file.replace(/[^0-9]/g, ""))
+                });
+            } catch (err) {
+                console.error("ไม่สามารถโหลดไฟล์:", file);
+            }
+        }
 
-    // 🔥 เรียงวันที่ล่าสุดขึ้นก่อน
-    sermons
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .forEach(s => {
+        // 3. เรียงลำดับจากวันที่ล่าสุดขึ้นก่อน (มากไปน้อย)
+        sermonData.sort((a, b) => b.rawDate - a.rawDate);
 
-        const card = document.createElement('article');
-        card.className = 'card';
+        // 4. แสดงผลบนหน้าเว็บ
+        container.innerHTML = ""; // ล้างค่า Loading
+        sermonData.forEach(item => {
+            const html = `
+                <a href="${item.url}" class="sermon-item">
+                    <div class="info-main">
+                        <span class="title">${item.title}</span>
+                        <span class="speaker">🎙️ ${item.speaker}</span>
+                    </div>
+                    <div class="date">${item.dateText}</div>
+                </a>
+            `;
+            container.innerHTML += html;
+        });
+    }
 
-        card.innerHTML = `
-          ${s.iframe}
-          <div class="content">
-            <div class="date">${s.date}</div>
-            <div class="title">${s.title}</div>
-            <div class="speaker">ผู้เทศนา: ${s.speaker}</div>
-            <a class="read" href="${s.file}">อ่านคำเทศนา →</a>
-          </div>
-        `;
-
-        grid.appendChild(card);
-      });
-  });
+    // เริ่มทำงาน
+    loadSermons();
 </script>
   </main>
   <div data-include="https://www.tannatthaphon.online/partials/footer.html"></div>
@@ -152,5 +181,6 @@
     </body>
 
 </html>
+
 
 
