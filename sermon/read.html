@@ -155,11 +155,17 @@
     </main>
 
     <!-- ✅ Include Footer -->
-    <div data-include="components/footer.html"></div>
+    <div data-include="https://www.tannatthaphon.online/partials/footer.html"></div>
 
-    <!-- ✅ สคริปต์ควบคุมการทำงาน -->
-    <script src="js/header-logic.js"></script>
-    <script src="/inciude.js"></script>
+  <script>
+    
+  </script>
+  <script src="https://www.tannatthaphon.online/js/main.js"></script>
+  <script src="https://www.tannatthaphon.online/js/analytics.js"></script>
+  <script src="https://www.tannatthaphon.online/js/form-handler.js"></script>
+  <script src="https://www.tannatthaphon.online/js/sdk.js"></script>
+  <script src="https://www.tannatthaphon.online/smooth.js"></script>
+  <script>
 
     <script>
         /**
@@ -176,7 +182,7 @@ function loadSermonDetail() {
     return;
   }
 
-  fetch(`/sermon/${sermonId}.html`)
+  fetch(`https://www.tannatthaphon.online/sermon/${sermonId}.html`)
     .then(res => {
       if (!res.ok) throw new Error('ไม่พบไฟล์');
       return res.text();
@@ -209,4 +215,5 @@ document.addEventListener('allIncludesLoaded', loadSermonDetail);
 </body>
 
 </html>
+
 
