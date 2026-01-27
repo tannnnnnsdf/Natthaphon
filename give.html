@@ -70,6 +70,42 @@
 <link rel="stylesheet" href="https://www.tannatthaphon.online/css/print.css" media="print">
 <link rel="stylesheet" href="https://www.tannatthaphon.online/css/variables.css">
 <link rel="stylesheet" href="https://www.tannatthaphon.online/css/home.css">
+  <style>
+        .offering-section { max-width: 500px; margin: 40px auto; padding: 0 20px; font-family: 'Prompt', sans-serif; }
+        
+        /* Tab System */
+        .tab-wrapper { display: flex; background: #eee; border-radius: 12px; padding: 5px; margin-bottom: 25px; }
+        .tab-btn { flex: 1; padding: 12px; border: none; background: none; cursor: pointer; border-radius: 8px; font-family: 'Prompt'; font-weight: 600; transition: 0.3s; color: var(--text-muted); }
+        .tab-btn.active { background: var(--primary-color); color: white; box-shadow: var(--shadow-sm); }
+
+        .tab-content { display: none; background: white; border-radius: 15px; padding: 25px; border: 1px solid var(--border-color); box-shadow: var(--shadow-lg); }
+        .tab-content.active { display: block; animation: fadeIn 0.4s; }
+
+        /* QR Code & Bank Info */
+        .qr-container { text-align: center; }
+        .qr-image-wrapper { 
+            width: 100%; 
+            max-width: 280px; 
+            margin: 20px auto; 
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #eee; 
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+        .qr-image-wrapper img { width: 100%; height: auto; display: block; }
+        
+        .bank-info { background: var(--bg-alt); padding: 15px; border-radius: 10px; margin-top: 20px; text-align: left; border-left: 4px solid var(--primary-color); }
+        .bank-info p { margin: 8px 0; font-size: 0.95rem; color: var(--text-main); }
+
+        /* Form Styling */
+        .form-compact label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-main); font-size: 0.9rem; }
+        .form-compact input { width: 100%; padding: 12px; margin-bottom: 18px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Prompt'; }
+        .btn-submit { width: 100%; padding: 16px; background: var(--primary-color); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: 0.2s; }
+        .btn-submit:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
   <style>@view-transition { navigation: auto; }</style> 
  </head>
  <body>
@@ -85,9 +121,48 @@
     <!-- ========================================
        MAIN BODY CONTENT (ส่วนเนื้อหาหลัก)
   ======================================== -->
-  <main class="main-content">
-    <h1>นี่คือหน้าถวายทรัพย์</h1>
-  </main>
+  <main class="offering-section">
+    <h2 style="text-align: center; margin-bottom: 25px; color: var(--text-main);">สนับสนุนพันธกิจ</h2>
+
+    <!-- ปุ่มสลับ Tab -->
+    <div class="tab-wrapper">
+        <button class="tab-btn active" onclick="openTab(event, 'pay-tab')">ช่องทางถวาย</button>
+        <button class="tab-btn" onclick="openTab(event, 'form-tab')">แจ้งส่งสลิป</button>
+    </div>
+
+    <!-- แท็บที่ 1: ช่องทางถวาย (แสดง QR Code) -->
+    <div id="pay-tab" class="tab-content active">
+        <div class="qr-container">
+            <img src="/assets/images/PromptPay.jpg" style="width: 130px; margin-bottom: 10px;">
+            <div class="qr-image-wrapper">
+                <!-- ✅ ใส่รูป QR Code ของคุณตามพาธที่ระบุเรียบร้อยแล้ว -->
+                <img src="/assets/images/0871277654.png" alt="PromptPay QR Code">
+            </div>
+            <div class="bank-info">
+                <p><strong>ชื่อบัญชี:</strong> MR. HYEON JEA LEE</p>
+                <p><strong>ธนาคาร:</strong> กรุงเทพ (BBL)</p>
+                <p><strong>เลขบัญชี:</strong> 105-4-65693-7</p>
+                <p><strong>พร้อมเพย์:</strong> 087-127-7654</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- แท็บที่ 2: ฟอร์มส่งสลิป -->
+    <div id="form-tab" class="tab-content">
+        <form class="form-compact" action="#" method="POST" enctype="multipart/form-data">
+            <label for="donator-name">ชื่อ-นามสกุลผู้ถวาย</label>
+            <input type="text" id="donator-name" name="donator-name" placeholder="ระบุชื่อเพื่อบันทึกบัญชี" required>
+            
+            <label for="amount">ยอดเงินถวาย (บาท)</label>
+            <input type="number" id="amount" name="amount" placeholder="0.00" step="0.01" required>
+            
+            <label for="slip-image">แนบรูปภาพสลิป</label>
+            <input type="file" id="slip-image" name="slip-image" accept="image/*" required>
+            
+            <button type="submit" class="btn-submit">ยืนยันการส่งสลิป</button>
+        </form>
+    </div>
+</main>
   <div data-include="https://www.tannatthaphon.online/partials/footer.html"></div>
 
   <script>
@@ -101,3 +176,4 @@
     </body>
 
 </html>
+
