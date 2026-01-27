@@ -175,7 +175,7 @@ function loadSermonDetail() {
     return;
   }
 
-  fetch(`https://www.tannatthaphon.online/sermon/${sermonId}.html`)
+  fetch(`/sermon/${sermonId}.html`)
     .then(res => {
       if (!res.ok) throw new Error('ไม่พบไฟล์');
       return res.text();
@@ -208,6 +208,7 @@ document.addEventListener('allIncludesLoaded', loadSermonDetail);
 </body>
 
 </html>
+
 
 
 
