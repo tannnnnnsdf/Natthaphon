@@ -77,6 +77,39 @@
 
   gtag('config', 'G-5M7X60SWVW');
 </script>
+  <script>
+// Define dataLayer and the gtag function.
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+
+// Set default consent to 'denied' as a placeholder
+// Determine actual values based on your own requirements
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'analytics_storage': 'denied'
+});
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=TAG_ID">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+  gtag('config', 'TAG_ID');
+</script>
+
+<!-- Create one update function for each consent parameter -->
+<script>
+  function consentGrantedAdStorage() {
+    gtag('consent', 'update', {
+      'ad_storage': 'granted'
+    });
+  }
+</script>
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="https://www.tannatthaphon.online/css/print.css" media="print">
 <link rel="stylesheet" href="https://www.tannatthaphon.online/css/variables.css">
@@ -222,9 +255,7 @@
   </section>
   </main>
   <div data-include="https://www.tannatthaphon.online/partials/footer.html"></div>
-  <script>
-    
-  </script>
+  <button onclick="consentGrantedAdStorage">Yes</button>
   <script src="https://www.tannatthaphon.online/js/main.js"></script>
   <script src="https://www.tannatthaphon.online/js/analytics.js"></script>
   <script src="https://www.tannatthaphon.online/js/form-handler.js"></script>
@@ -234,4 +265,5 @@
     </body>
 
 </html>
+
 
