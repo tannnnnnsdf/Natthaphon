@@ -1,69 +1,66 @@
- :root {
-      --primary: #31547c;
-      --primary-dark: #31547c;
-      --primary-light: #31547c;
-      --accent: #f59e0b;
-      --surface: #ffffff;
-      --surface-dark: #f8fafc;
-      --text-primary: #0f172a;
-      --text-secondary: #475569;
-      --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
+/* ==========================================================================
+   ไฟล์: css/variables.css
+   รายละเอียด: จัดการตัวแปรพื้นฐาน (Design System) ของเว็บไซต์ JDM Bangkok
+   ========================================================================== */
 
-    /* Noto Sans Fonts */
-    @font-face {
-      font-family: 'Noto Sans';
-      src: url('../assets/fonts/Noto_Sans/NotoSans-Regular.woff2') format('woff2');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
+:root {
+  /* =========================================
+     1. สีหลักของแบรนด์ (Brand Colors)
+     ========================================= */
+  /* สีน้ำเงินเข้ม: สื่อถึงความเชื่อมั่น มั่นคง และเป็นทางการ */
+  --color-primary: #1E3A8A;    
+  /* สีเหลืองทอง/ส้ม: สื่อถึงความอบอุ่น พลัง และการต้อนรับ */
+  --color-secondary: #F59E0B;  
+  
+  /* สีพื้นหลังและข้อความ (Neutral Colors) */
+  --color-text-main: #1E293B;  /* สีเทาเข้มเกือบดำ สำหรับเนื้อหา (อ่านง่ายกว่าสีดำสนิท) */
+  --color-text-muted: #64748B; /* สีเทากลาง สำหรับข้อความรอง หรือวันที่ */
+  --color-bg-light: #F8FAFC;   /* สีขาวหม่น สำหรับพื้นหลังหน้าเว็บ */
+  --color-bg-white: #FFFFFF;   /* สีขาวล้วน สำหรับการ์ดหรือส่วนที่ต้องการให้เด้งออกมา */
+  --color-border: #E2E8F0;     /* สีเส้นขอบ */
 
-    @font-face {
-      font-family: 'Noto Sans';
-      src: url('../assets/fonts/Noto_Sans/NotoSans-SemiBold.woff2') format('woff2');
-      font-weight: 600;
-      font-style: normal;
-      font-display: swap;
-    }
+  /* =========================================
+     2. แกนสัดส่วนทองคำ (Golden Ratio Base)
+     ========================================= */
+  --golden-ratio: 1.618;
+  --base-size: 16px; /* ขนาดตัวอักษรตั้งต้น */
 
-    @font-face {
-      font-family: 'Noto Sans Thai';
-      src: url('../assets/fonts/Noto_Sans_Thai/NotoSansThai-Regular.woff2') format('woff2');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
+  /* =========================================
+     3. ขนาดตัวอักษร (Typography)
+     ========================================= */
+  /* คุณสามารถเปลี่ยนเป็นฟอนต์อื่นได้ตามที่ติดตั้งไว้ */
+  --font-family-main: 'JDM Bangkok', 'Sarabun', 'Kanit', sans-serif;
+  
+  /* ความห่างระหว่างบรรทัด */
+  --line-height-body: var(--golden-ratio); /* 1.618 สำหรับเนื้อหาให้อ่านสบายตา */
+  --line-height-heading: 1.2;              /* 1.2 สำหรับหัวข้อให้กระชับ */
 
-    @font-face {
-      font-family: 'Noto Sans Thai';
-      src: url('../assets/fonts/Noto_Sans_Thai/NotoSansThai-Medium.woff2') format('woff2');
-      font-weight: 500;
-      font-style: normal;
-      font-display: swap;
-    }
+  /* Font Sizes (คำนวณอัตโนมัติตามสัดส่วนทองคำ) */
+  --font-size-sm: calc(var(--base-size) / var(--golden-ratio)); /* ~10px (หมายเหตุ) */
+  --font-size-base: var(--base-size);                           /* 16px (เนื้อหา) */
+  --font-size-lg: calc(var(--base-size) * var(--golden-ratio)); /* ~26px (H3) */
+  --font-size-xl: calc(var(--base-size) * var(--golden-ratio) * 1.25); /* ~32px (H2) */
+  --font-size-xxl: calc(var(--base-size) * var(--golden-ratio) * var(--golden-ratio)); /* ~42px (H1 Mobile) */
+  --font-size-hero: calc(var(--base-size) * var(--golden-ratio) * var(--golden-ratio) * var(--golden-ratio)); /* ~68px (H1 Desktop) */
 
-    @font-face {
-      font-family: 'Noto Sans Thai';
-      src: url('../assets/fonts/Noto_Sans_Thai/NotoSansThai-Bold.woff2') format('woff2');
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-    }
+  /* =========================================
+     4. ระยะห่าง (Spacing)
+     ========================================= */
+  /* ใช้สำหรับ Margin และ Padding เพื่อให้ช่องไฟสมดุลตามธรรมชาติ */
+  --space-xs: calc(1rem / var(--golden-ratio) / var(--golden-ratio)); /* ~0.38rem */
+  --space-sm: calc(1rem / var(--golden-ratio)); /* ~0.618rem */
+  --space-md: 1rem;                             /* 16px */
+  --space-lg: calc(1rem * var(--golden-ratio)); /* ~1.618rem (26px) */
+  --space-xl: calc(1rem * var(--golden-ratio) * var(--golden-ratio)); /* ~2.618rem (42px) */
+  --space-xxl: calc(1rem * var(--golden-ratio) * var(--golden-ratio) * var(--golden-ratio)); /* ~4.23rem (68px) */
 
-    @font-face {
-      font-family: 'Noto Sans KR';
-      src: url('../assets/fonts/Noto_Sans_KR/NotoSansKR-Regular.woff2') format('woff2');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Noto Sans KR';
-      src: url('../assets/fonts/Noto_Sans_KR/NotoSansKR-Bold.woff2') format('woff2');
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-
-    }
+  /* =========================================
+     5. องค์ประกอบ UI (UI Elements)
+     ========================================= */
+  --border-radius: 8px; /* ความโค้งมนของการ์ดและปุ่ม */
+  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* เงาบางๆ ให้ดูมีมิติ */
+  --transition-speed: 0.3s; /* ความเร็วเวลานำเมาส์ไปชี้ (Hover) */
+  
+  /* Layout */
+  --max-width-container: 1200px; /* ความกว้างสูงสุดของเว็บเวลากางเต็มจอคอม */
+}
