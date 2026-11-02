@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบตารางเวลาประจำสัปดาห์</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .form-container, .preview-container {
+            max-width: 600px;
+            background: white;
+            padding: 15px;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-container h2, .preview-container h2 {
+            font-size: 18px;
+            margin-top: 0;
+            color: #2e7d32;
+            border-bottom: 2px solid #2e7d32;
+            padding-bottom: 8px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: 'Sarabun', sans-serif;
+            background-color: #fff;
+        }
+
+        .day-card {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .day-card h4 {
+            margin: 0 0 8px 0;
+            color: #1b5e20;
+            font-size: 16px;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 4px;
+        }
+
+        .day-card label {
+            font-size: 13px;
+            color: #444;
+            display: block;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+
+        .day-card textarea {
+            width: 100%;
+            height: 60px;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: 'Sarabun', sans-serif;
+            resize: vertical;
+            background-color: #fff;
+        }
+
+        .btn-submit {
+            background-color: #2e7d32;
+            color: white;
+            padding: 14px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .btn-save {
+            background-color: #d32f2f;
+        }
+
+        .btn-back {
+            background-color: #555;
+            margin-top: 10px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .instruction-box {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 14px;
+            border: 1px dashed #2e7d32;
+        }
+
+        /* ซ่อนแม่แบบตอนกรอกข้อมูล */
+        #pdf-container {
+            display: none;
+        }
+
+        /* ล็อกขนาด A4 แนวนอนให้อยู่ใน 1 หน้าพอดีเป๊ะ ไม่ให้ตกไปหน้า 2 */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #pdf-container, #pdf-container * {
+                visibility: visible;
+            }
+            #pdf-container {
+                display: block !important;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 297mm;
+                height: 210mm;
+                padding: 6mm 10mm;
+                box-sizing: border-box;
+                background: white;
+                overflow: hidden;
+            }
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+        }
+
+        .header-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+
+        .info-line {
+            border-bottom: 1.5px dotted #000;
+            display: inline-block;
+            min-width: 250px;
+            padding: 0 4px;
+        }
+
+        .logo-box {
+            width: 45px;
+            height: 45px;
+            border: 1.5px solid #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 8px;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        table.schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        table.schedule-table th, table.schedule-table td {
+            border: 1px solid #000;
+            padding: 3px 4px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* กำหนดความสูงหัวตารางและเนื้อหาให้กระชับลงเพื่อให้อยู่ใน 1 หน้าพอดี */
+        table.schedule-table th {
+            background-color: #f2f2f2 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            font-weight: 600;
+            height: 24px;
+        }
+
+        table.schedule-table td {
+            height: 42px;
+        }
+
+        .text-left {
+            text-align: left !important;
+            white-space: pre-line;
+            vertical-align: top !important;
+            padding-top: 4px !important;
+        }
+
+        .signature-section {
+            position: absolute;
+            right: 10mm;
+            bottom: 6mm;
+            text-align: right;
+            font-size: 12px;
+        }
+
+        .sig-line {
+            border-bottom: 1.5px dotted #000;
+            width: 140px;
+            display: inline-block;
+        }
+
+        /* พรีวิวหน้าจอเว็บ */
+        .preview-box-screen {
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- หน้าที่ 1: ฟอร์มกรอกข้อมูล -->
+    <div id="form-screen" class="form-container">
+        <h2>ตารางเวลาประจำสัปดาห์ ( ค.ศ. )</h2>
+        
+        <div class="input-group">
+            <label>ชื่อ-นามสกุล:</label>
+            <input type="text" id="input-name" placeholder="ระบุชื่อของคุณ">
+        </div>
+
+        <div class="input-group">
+            <label>วันที่เริ่มต้นสัปดาห์ (วันอาทิตย์ ค.ศ.):</label>
+            <input type="date" id="input-start-date">
+        </div>
+
+        <h3 style="font-size: 16px; margin: 15px 0 10px 0; color: #333;">กรอกกิจกรรมแต่ละวัน</h3>
+
+        <div class="day-card"><h4>วันอาทิตย์</h4><label>เช้า:</label><textarea id="sun-m"></textarea><label>บ่าย:</label><textarea id="sun-a"></textarea><label>เย็น:</label><textarea id="sun-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="sun-s"></textarea></div>
+        <div class="day-card"><h4>วันจันทร์</h4><label>เช้า:</label><textarea id="mon-m"></textarea><label>บ่าย:</label><textarea id="mon-a"></textarea><label>เย็น:</label><textarea id="mon-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="mon-s"></textarea></div>
+        <div class="day-card"><h4>วันอังคาร</h4><label>เช้า:</label><textarea id="tue-m"></textarea><label>บ่าย:</label><textarea id="tue-a"></textarea><label>เย็น:</label><textarea id="tue-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="tue-s"></textarea></div>
+        <div class="day-card"><h4>วันพุธ</h4><label>เช้า:</label><textarea id="wed-m"></textarea><label>บ่าย:</label><textarea id="wed-a"></textarea><label>เย็น:</label><textarea id="wed-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="wed-s"></textarea></div>
+        <div class="day-card"><h4>วันพฤหัสบดี</h4><label>เช้า:</label><textarea id="thu-m"></textarea><label>บ่าย:</label><textarea id="thu-a"></textarea><label>เย็น:</label><textarea id="thu-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="thu-s"></textarea></div>
+        <div class="day-card"><h4>วันศุกร์</h4><label>เช้า:</label><textarea id="fri-m"></textarea><label>บ่าย:</label><textarea id="fri-a"></textarea><label>เย็น:</label><textarea id="fri-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="fri-s"></textarea></div>
+        <div class="day-card"><h4>วันเสาร์</h4><label>เช้า:</label><textarea id="sat-m"></textarea><label>บ่าย:</label><textarea id="sat-a"></textarea><label>เย็น:</label><textarea id="sat-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="sat-s"></textarea></div>
+
+        <button class="btn-submit" onclick="goToPreview()">🔍 ดูหน้าพรีวิวตารางรายงาน</button>
+    </div>
+
+    <!-- หน้าที่ 2: หน้าจอพรีวิวและปุ่มบันทึก PDF -->
+    <div id="preview-screen" class="preview-container hidden">
+        <h2>พรีวิวตารางรายงาน</h2>
+        <div class="instruction-box">
+            📄 ปรับขนาดตารางให้พอดี 1 หน้าเป๊ะๆ แล้ว กดปุ่มด้านล่างเพื่อบันทึก PDF ได้เลย!
+        </div>
+        
+        <div class="preview-box-screen" id="web-preview-area"></div>
+
+        <button class="btn-submit btn-save" onclick="triggerPDFPrint()">📄 บันทึกเป็น PDF (1 หน้าพอดี)</button>
+        <button class="btn-submit btn-back" onclick="goBackToForm()">✏️ กลับไปแก้ไขข้อมูล</button>
+    </div>
+
+    <!-- แม่แบบ PDF -->
+    <div id="pdf-container">
+        <div class="header-title">ตารางเวลาประจำสัปดาห์</div>
+        
+        <div class="info-row">
+            <div>
+                ชื่อ: <span class="info-line" id="p-out-name"></span><br>
+                วันที่: <span class="info-line" id="p-out-date"></span>
+            </div>
+            <div class="logo-box">
+                JDM<br><span style="font-size: 7px;">2004THAI</span>
+            </div>
+        </div>
+
+        <table class="schedule-table">
+            <tr>
+                <th style="width: 11%;">เวลา \ วัน</th>
+                <th style="width: 12.7%;">อาทิตย์<br><span id="p-d-sun" style="font-weight: normal; font-size: 10px;"></span></th>
+                <th style="width: 12.7%;">จันทร์<br><span id="p-d-mon" style="font-weight: normal; font-size: 10px;"></span></th>
+                <th style="width: 12.7%;">อังคาร<br><span id="p-d-tue" style="font-weight: normal; font-size: 10px;"></span></th>
+                <th style="width: 12.7%;">พุธ<br><span id="p-d-wed" style="font-weight: normal; font-size: 10px;"></span></th>
+                <th style="width: 12.7%;">พฤหัสบดี<br><span id="p-d-thu" style="font-weight: normal; font-size: 10px;"></span></th>
+                <th style="width: 12.7%;">ศุกร์<br><span id="p-d-fri" style="font-weight: normal; font-size: 10px;"></span></th>
+                <th style="width: 12.7%;">เสาร์<br><span id="p-d-sat" style="font-weight: normal; font-size: 10px;"></span></th>
+            </tr>
+            <tr>
+                <td style="font-weight: 600;">เช้า</td>
+                <td class="text-left" id="p-out-sun-m"></td>
+                <td class="text-left" id="p-out-mon-m"></td>
+                <td class="text-left" id="p-out-tue-m"></td>
+                <td class="text-left" id="p-out-wed-m"></td>
+                <td class="text-left" id="p-out-thu-m"></td>
+                <td class="text-left" id="p-out-fri-m"></td>
+                <td class="text-left" id="p-out-sat-m"></td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600;">บ่าย</td>
+                <td class="text-left" id="p-out-sun-a"></td>
+                <td class="text-left" id="p-out-mon-a"></td>
+                <td class="text-left" id="p-out-tue-a"></td>
+                <td class="text-left" id="p-out-wed-a"></td>
+                <td class="text-left" id="p-out-thu-a"></td>
+                <td class="text-left" id="p-out-fri-a"></td>
+                <td class="text-left" id="p-out-sat-a"></td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600;">เย็น</td>
+                <td class="text-left" id="p-out-sun-e"></td>
+                <td class="text-left" id="p-out-mon-e"></td>
+                <td class="text-left" id="p-out-tue-e"></td>
+                <td class="text-left" id="p-out-wed-e"></td>
+                <td class="text-left" id="p-out-thu-e"></td>
+                <td class="text-left" id="p-out-fri-e"></td>
+                <td class="text-left" id="p-out-sat-e"></td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600;">กิจกรรมพิเศษ</td>
+                <td class="text-left" id="p-out-sun-s"></td>
+                <td class="text-left" id="p-out-mon-s"></td>
+                <td class="text-left" id="p-out-tue-s"></td>
+                <td class="text-left" id="p-out-wed-s"></td>
+                <td class="text-left" id="p-out-thu-s"></td>
+                <td class="text-left" id="p-out-fri-s"></td>
+                <td class="text-left" id="p-out-sat-s"></td>
+            </tr>
+        </table>
+
+        <div class="signature-section">
+            ชื่อ ..................................................... ผู้นำ<br>
+            วันที่ .....................................................
+        </div>
+    </div>
+
+    <script>
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        document.getElementById('input-start-date').value = `${yyyy}-${mm}-${dd}`;
+
+        const daysList = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
+        function goToPreview() {
+            const name = document.getElementById('input-name').value;
+            const startDateVal = document.getElementById('input-start-date').value;
+
+            if(!name || !startDateVal) {
+                alert('กรุณากรอกชื่อและเลือกวันที่เริ่มต้นสัปดาห์ก่อนครับ');
+                return;
+            }
+
+            const [year, month, day] = startDateVal.split('-').map(Number);
+            let startDate = new Date(year, month - 1, day);
+
+            let dates = [];
+            for(let i=0; i<7; i++) {
+                let d = new Date(year, month - 1, day + i);
+                dates.push(d.getDate());
+            }
+
+            document.getElementById('p-d-sun').innerText = dates[0];
+            document.getElementById('p-d-mon').innerText = dates[1];
+            document.getElementById('p-d-tue').innerText = dates[2];
+            document.getElementById('p-d-wed').innerText = dates[3];
+            document.getElementById('p-d-thu').innerText = dates[4];
+            document.getElementById('p-d-fri').innerText = dates[5];
+            document.getElementById('p-d-sat').innerText = dates[6];
+
+            document.getElementById('p-out-name').innerText = name;
+            let formattedStartDate = startDate.toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            document.getElementById('p-out-date').innerText = formattedStartDate;
+
+            daysList.forEach(dayId => {
+                ['m', 'a', 'e', 's'].forEach(slot => {
+                    let val = document.getElementById(`${dayId}-${slot}`).value;
+                    document.getElementById(`p-out-${dayId}-${slot}`).innerText = val;
+                });
+            });
+
+            document.getElementById('web-preview-area').innerHTML = document.getElementById('pdf-container').innerHTML;
+
+            document.getElementById('form-screen').classList.add('hidden');
+            document.getElementById('preview-screen').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function goBackToForm() {
+            document.getElementById('preview-screen').classList.add('hidden');
+            document.getElementById('form-screen').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function triggerPDFPrint() {
+            window.print();
+        }
+    </script>
+
+</body>
+</html>
