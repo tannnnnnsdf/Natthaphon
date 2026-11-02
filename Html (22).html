@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบตารางเวลาประจำสัปดาห์ (ดาวน์โหลด PDF ทันที)</title>
+    <!-- โหลดไลบรารี pdfmake และฟอนต์ภาษาไทย Sarabun -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            background: white;
+            padding: 15px;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-container h2 {
+            font-size: 18px;
+            margin-top: 0;
+            color: #2e7d32;
+            border-bottom: 2px solid #2e7d32;
+            padding-bottom: 8px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: 'Sarabun', sans-serif;
+            background-color: #fff;
+        }
+
+        .day-card {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .day-card h4 {
+            margin: 0 0 8px 0;
+            color: #1b5e20;
+            font-size: 16px;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 4px;
+        }
+
+        .day-card label {
+            font-size: 13px;
+            color: #444;
+            display: block;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+
+        .day-card textarea {
+            width: 100%;
+            height: 60px;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: 'Sarabun', sans-serif;
+            resize: vertical;
+            background-color: #fff;
+        }
+
+        .btn-submit {
+            background-color: #2e7d32;
+            color: white;
+            padding: 14px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .btn-submit:hover {
+            background-color: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>ตารางเวลาประจำสัปดาห์ ( ค.ศ. )</h2>
+        
+        <div class="input-group">
+            <label>ชื่อ-นามสกุล:</label>
+            <input type="text" id="input-name" placeholder="ระบุชื่อของคุณ">
+        </div>
+
+        <div class="input-group">
+            <label>วันที่เริ่มต้นสัปดาห์ (วันอาทิตย์ ค.ศ.):</label>
+            <input type="date" id="input-start-date">
+        </div>
+
+        <h3 style="font-size: 16px; margin: 15px 0 10px 0; color: #333;">กรอกกิจกรรมแต่ละวัน</h3>
+
+        <!-- ช่องกรอกแต่ละวัน -->
+        <div class="day-card"><h4>วันอาทิตย์</h4><label>เช้า:</label><textarea id="sun-m"></textarea><label>บ่าย:</label><textarea id="sun-a"></textarea><label>เย็น:</label><textarea id="sun-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="sun-s"></textarea></div>
+        <div class="day-card"><h4>วันจันทร์</h4><label>เช้า:</label><textarea id="mon-m"></textarea><label>บ่าย:</label><textarea id="mon-a"></textarea><label>เย็น:</label><textarea id="mon-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="mon-s"></textarea></div>
+        <div class="day-card"><h4>วันอังคาร</h4><label>เช้า:</label><textarea id="tue-m"></textarea><label>บ่าย:</label><textarea id="tue-a"></textarea><label>เย็น:</label><textarea id="tue-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="tue-s"></textarea></div>
+        <div class="day-card"><h4>วันพุธ</h4><label>เช้า:</label><textarea id="wed-m"></textarea><label>บ่าย:</label><textarea id="wed-a"></textarea><label>เย็น:</label><textarea id="wed-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="wed-s"></textarea></div>
+        <div class="day-card"><h4>วันพฤหัสบดี</h4><label>เช้า:</label><textarea id="thu-m"></textarea><label>บ่าย:</label><textarea id="thu-a"></textarea><label>เย็น:</label><textarea id="thu-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="thu-s"></textarea></div>
+        <div class="day-card"><h4>วันศุกร์</h4><label>เช้า:</label><textarea id="fri-m"></textarea><label>บ่าย:</label><textarea id="fri-a"></textarea><label>เย็น:</label><textarea id="fri-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="fri-s"></textarea></div>
+        <div class="day-card"><h4>วันเสาร์</h4><label>เช้า:</label><textarea id="sat-m"></textarea><label>บ่าย:</label><textarea id="sat-a"></textarea><label>เย็น:</label><textarea id="sat-e"></textarea><label>กิจกรรมพิเศษ:</label><textarea id="sat-s"></textarea></div>
+
+        <button class="btn-submit" onclick="generatePDF()">📥 ดาวน์โหลดไฟล์ PDF ทันที</button>
+    </div>
+
+    <script>
+        // ตั้งค่าฟอนต์ Sarabun ให้ pdfmake รองรับภาษาไทย 100%
+        pdfMake.fonts = {
+            Sarabun: {
+                normal: 'https://cdn.jsdelivr.net/gh/lazywasabi/thai-font-dist@master/fonts/Sarabun/Sarabun-Regular.ttf',
+                bold: 'https://cdn.jsdelivr.net/gh/lazywasabi/thai-font-dist@master/fonts/Sarabun/Sarabun-Bold.ttf',
+                italics: 'https://cdn.jsdelivr.net/gh/lazywasabi/thai-font-dist@master/fonts/Sarabun/Sarabun-Italic.ttf',
+                bolditalics: 'https://cdn.jsdelivr.net/gh/lazywasabi/thai-font-dist@master/fonts/Sarabun/Sarabun-BoldItalic.ttf'
+            }
+        };
+
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        document.getElementById('input-start-date').value = `${yyyy}-${mm}-${dd}`;
+
+        const daysList = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
+        function generatePDF() {
+            const name = document.getElementById('input-name').value;
+            const startDateVal = document.getElementById('input-start-date').value;
+
+            if(!name || !startDateVal) {
+                alert('กรุณากรอกชื่อและเลือกวันที่เริ่มต้นสัปดาห์ก่อนครับ');
+                return;
+            }
+
+            const [year, month, day] = startDateVal.split('-').map(Number);
+            let startDate = new Date(year, month - 1, day);
+
+            let dates = [];
+            for(let i=0; i<7; i++) {
+                let d = new Date(year, month - 1, day + i);
+                dates.push(d.getDate());
+            }
+
+            let formattedStartDate = startDate.toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            let safeDateStr = formattedStartDate.replace(/\//g, '-');
+            let baseFileName = `รายงานประจำสัปดาห์ชื่อ ${name} วันที่ ${safeDateStr}.pdf`;
+
+            // ดึงข้อมูลกิจกรรมแต่ละวัน
+            let valData = {};
+            daysList.forEach(dayId => {
+                valData[dayId] = {
+                    m: document.getElementById(`${dayId}-m`).value,
+                    a: document.getElementById(`${dayId}-a`).value,
+                    e: document.getElementById(`${dayId}-e`).value,
+                    s: document.getElementById(`${dayId}-s`).value
+                };
+            });
+
+            // สร้างโครงสร้างเอกสาร PDF
+            const docDefinition = {
+                pageSize: 'A4',
+                pageOrientation: 'landscape',
+                pageMargins: [30, 30, 30, 30],
+                defaultStyle: {
+                    font: 'Sarabun',
+                    fontSize: 10
+                },
+                content: [
+                    { text: 'ตารางเวลาประจำสัปดาห์', fontSize: 18, bold: true, alignment: 'center', margin: [0, 0, 0, 15] },
+                    {
+                        columns: [
+                            {
+                                width: '*',
+                                text: [
+                                    { text: `ชื่อ:   ${name}\n`, fontSize: 12 },
+                                    { text: `วันที่: ${formattedStartDate}`, fontSize: 12 }
+                                ]
+                            },
+                            {
+                                width: 50,
+                                text: 'JDM\n2004THAI',
+                                alignment: 'center',
+                                fontSize: 9,
+                                bold: true,
+                                margin: [0, 0, 0, 0]
+                            }
+                        ],
+                        margin: [0, 0, 0, 15]
+                    },
+                    {
+                        table: {
+                            headerRows: 1,
+                            widths: ['11%', '12.7%', '12.7%', '12.7%', '12.7%', '12.7%', '12.7%', '12.7%'],
+                            body: [
+                                [
+                                    { text: 'เวลา \\ วัน', bold: true, alignment: 'center', fillColor: '#f2f2f2' },
+                                    { text: `อาทิตย์\n${dates[0]}`, bold: true, alignment: 'center', fillColor: '#f2f2f2' },
+                                    { text: `จันทร์\n${dates[1]}`, bold: true, alignment: 'center', fillColor: '#f2f2f2' },
+                                    { text: `อังคาร\n${dates[2]}`, bold: true, alignment: 'center', fillColor: '#f2f2f2' },
+                                    { text: `พุธ\n${dates[3]}`, bold: true, alignment: 'center', fillColor: '#f2f2f2' },
+                                    { text: `พฤหัสบดี\n${dates[4]}`, bold: true, alignment: 'center', fillColor: '#f2f2f2' },
+                                    { text: `ศุกร์\n${dates[5]}`, bold: true, alignment: 'center', fillColor: '#f2f2f2' },
+                                    { text: `เสาร์\n${dates[6]}`, bold: true, alignment: 'center', fillColor: '#f2f2f2' }
+                                ],
+                                [
+                                    { text: 'เช้า', bold: true, alignment: 'center', verticalAlignment: 'middle' },
+                                    valData.sun.m, valData.mon.m, valData.tue.m, valData.wed.m, valData.thu.m, valData.fri.m, valData.sat.m
+                                ],
+                                [
+                                    { text: 'บ่าย', bold: true, alignment: 'center' },
+                                    valData.sun.a, valData.mon.a, valData.tue.a, valData.wed.a, valData.thu.a, valData.fri.a, valData.sat.a
+                                ],
+                                [
+                                    { text: 'เย็น', bold: true, alignment: 'center' },
+                                    valData.sun.e, valData.mon.e, valData.tue.e, valData.wed.e, valData.thu.e, valData.fri.e, valData.sat.e
+                                ],
+                                [
+                                    { text: 'กิจกรรมพิเศษ', bold: true, alignment: 'center' },
+                                    valData.sun.s, valData.mon.s, valData.tue.s, valData.wed.s, valData.thu.s, valData.fri.s, valData.sat.s
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        text: `ชื่อ ..................................................... ผู้นำ\nวันที่ .....................................................`,
+                        alignment: 'right',
+                        margin: [0, 20, 10, 0],
+                        fontSize: 11
+                    }
+                ]
+            };
+
+            // สั่งดาวน์โหลดไฟล์ PDF ทันทีโดยไม่เปิดหน้าพรีวิว
+            pdfMake.createPdf(docDefinition).download(baseFileName);
+        }
+    </script>
+
+</body>
+</html>
